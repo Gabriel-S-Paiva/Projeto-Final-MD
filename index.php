@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +15,7 @@
 </head>
 <body class="flex flex-col gap-5">
     <?php include './includes/navbar.php'; ?>
+    <h1 class="hidden">Komodu</h1>
     <main class="w-full flex flex-col items-center gap-5 px-4 py-2 md:px-20 md:py-10">
         <div class="w-full p-5 inline-flex flex-col justify-start items-start gap-2.5 overflow-hidden rounded-2xl bg-[#E5DCCA]">
             <img class="w-full rounded-xl" src="./Assets/Imgs/hero_mobile.png">
