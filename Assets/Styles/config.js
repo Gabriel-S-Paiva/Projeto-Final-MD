@@ -9,20 +9,19 @@ window.tailwind.config = {
         dark: '#2E2E2E'
       },
       fontFamily: {
-        uni: ['Unispace', 'roboto'],
+        uni: ['Unispace', 'Roboto', 'sans-serif'],
         switzer: ['Switzer', 'sans-serif']
       }
     }
   },
-  content: [
-    './**/*.php',
-    './**/*.html',
-    './Assets/**/*.js'
-  ],
+
   safelist: [
     'bg-primary', 'text-primary',
     'bg-light', 'text-light',
     'bg-secondary', 'text-secondary',
-    'font-uni', 'font-switzer'
+    'font-uni', 'font-switzer',
+    { pattern: /^(bg|text|font)-/ }
   ]
 }
+
+console.log('tailwind.config loaded', window.tailwind && window.tailwind.config);
