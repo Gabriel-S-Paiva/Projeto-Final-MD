@@ -19,7 +19,7 @@
     <h1 class="hidden">Komodu - Perfil</h1>
     <h2 class="hidden">O meu perfil</h2>
     <main class="w-full flex flex-col items-center gap-5 px-4 py-2 md:px-20 md:py-10">
-        <span id="initials" class="w-24 h-24 rounded-full p-5 bg-[#3A4A5A] font-bold text-4xl font-['Unispace'] text-white"><!-- First and Last(if aplicable) Letter --></span>
+        <span id="initials" class="w-24 h-24 rounded-full bg-[#3A4A5A] font-bold text-4xl font-['Unispace'] text-white flex items-center justify-center"><!-- First and Last(if aplicable) Letter --></span>
         <p id="username" class="justify-start text-[#3A4A5A] text-xl font-bold font-['Switzer']"><!-- Username --></p>
 
         <div class="self-stretch px-2.5 py-3.5 bg-[#E5DCCA] rounded-lg inline-flex flex-col justify-start items-start gap-2.5 overflow-hidden">
