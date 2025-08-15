@@ -28,7 +28,7 @@ document.getElementById('register-form').addEventListener('submit', function(e) 
 document.getElementById('login-form').addEventListener('submit', function(e) {
   e.preventDefault();
   const form = e.target;
-  fetch('/Projeto-Final-MD/api/login.php', {
+  fetch('/Projeto-Final-MD/api/userLog.php', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({

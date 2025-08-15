@@ -39,6 +39,6 @@
         </form>
     </main>
     <?php include '../includes/footer.php'; ?>
-    <script src="../Js/loginView.js"></script>
+    <script src="Js/loginView.js"></script>
 </body>
 </html>
