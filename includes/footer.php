@@ -1,10 +1,10 @@
 <div class="w-full p-5 bg-[#E5DCCA] rounded-tl-lg rounded-tr-lg inline-flex flex-col justify-start items-start gap-4 overflow-hidden">
     <nav class="self-stretch flex flex-col justify-start items-start gap-2.5">
-        <a href="index.php" class="justify-start text-black text-base font-normal font-['Switzer']">Inicio</a>
-        <a href="#" class="justify-start text-black text-base font-normal font-['Switzer']">Catalogo</a>
-        <a href="#" class="justify-start text-black text-base font-normal font-['Switzer']">Simulador</a>
-        <a href="#" class="justify-start text-black text-base font-normal font-['Switzer']">Sobre nós</a>
-        <a href="#" class="justify-start text-black text-base font-normal font-['Switzer']">Conta</a>
+        <a href="./index.php" class="justify-start text-black text-base font-normal font-['Switzer']">Inicio</a>
+        <a href="./pages/catalog.php" class="justify-start text-black text-base font-normal font-['Switzer']">Catalogo</a>
+        <a href="./pages/simulator.php" class="justify-start text-black text-base font-normal font-['Switzer']">Simulador</a>
+        <a href="./pages/about.php" class="justify-start text-black text-base font-normal font-['Switzer']">Sobre nós</a>
+        <a href="./pages/profile.php" class="justify-start text-black text-base font-normal font-['Switzer']">Conta</a>
     </nav>
     <div class="inline-flex justify-start items-center gap-3">
         <a href="#"><img src="./Assets/Imgs/facebook.svg" alt="Facebook" class="w-8 h-8" /></a>
