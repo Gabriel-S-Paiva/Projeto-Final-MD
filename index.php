@@ -29,7 +29,7 @@
         <div class="w-full p-5 inline-flex flex-col justify-start items-start gap-2.5 overflow-hidden rounded-2xl bg-[#E5DCCA]">
             <h3 class="justify-start text-[#3A4A5A] text-xl font-bold font-['Switzer']">Moveis em destaque</h3>
             <p class="font-['Switzer'] color-black text-base">Funcionais, empilhaveis e prontos a encaixar</p>
-            <div class=""> <!-- Scrolable -->
+            <div id="home-modules" class="w-full max-w-7xl mx-auto flex flex-row gap-5 overflow-x-auto sm:grid sm:grid-cols-3 sm:grid-rows-2 sm:gap-8 sm:overflow-x-visible">
 
             </div>
             <a href="./pages/catalog.php" class="w-full h-9 bg-[#E5DCCA] rounded outline outline-1 outline-offset-[-1px] outline-[#3A4A5A] overflow-hidden flex items-center justify-center text-base font-bold text-[#3A4A5A] font-['Switzer']">Ver todos os Produtos</a>
