@@ -36,8 +36,8 @@
         </div>
         <div class="w-full p-5 inline-flex flex-col justify-start items-start gap-2.5 overflow-hidden rounded-2xl bg-[#E5DCCA]">
             <h3 class="justify-start text-[#3A4A5A] text-xl font-bold font-['Switzer']">Modulos em destaque</h3>
-            <div id="cards-container">
-
+            <div id="catalog-list">
+                <!-- card content -->
             </div>
             <button class="self-stretch px-11 py-1 inline-flex justify-center items-center gap-1.5 overflow-hidden">
                 <p class="opacity-60 text-center justify-start text-black text-sm font-normal font-['Switzer']">Ver detalhes tecnicos</p>
@@ -46,5 +46,6 @@
         </div> 
     </main>
     <?php include '../includes/footer.php'; ?>
+    <script src="Js\catalogView.js"></script>
 </body>
 </html>

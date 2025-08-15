@@ -67,6 +67,6 @@
         </div>
     </main>
     <?php include './includes/footer.php'; ?>
-    <script src="./Js/"></script>
+    <script src="./Js/homeView.js"></script>
 </body>
 </html>
