@@ -15,6 +15,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Toggle favorite
     $stmt = $pdo->prepare("SELECT 1 FROM favorites WHERE user_id = ? AND module_id = ?");
     $stmt->execute([$user_id, $module_id]);
+    if (isset($_POST['remove'])) {
+        $stmt = $pdo->prepare("DELETE FROM favorites WHERE user_id = ? AND module_id = ?");
+        $stmt->execute([$user_id, $module_id]);
+        echo json_encode(['success' => true]);
+        exit;
+    }
     if ($stmt->fetch()) {
         $pdo->prepare("DELETE FROM favorites WHERE user_id = ? AND module_id = ?")->execute([$user_id, $module_id]);
         echo json_encode(['favorited' => false]);

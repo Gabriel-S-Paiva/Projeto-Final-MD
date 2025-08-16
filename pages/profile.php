@@ -39,6 +39,7 @@
         <div class="self-stretch p-2.5 bg-[#E5DCCA] rounded-lg inline-flex flex-col justify-start items-start gap-3 overflow-hidden">
             <h3 class="justify-start text-black text-xl font-bold font-['Switzer']">Dados pessoais</h3>
             <p id="name" class="justify-start text-black text-base font-normal font-['Switzer']">Sofia Mendes</p>
+            <p id="age" class="justify-start text-black text-base font-normal font-['Switzer']">Idade</p>
             <p id="email" class="justify-start text-black text-base font-normal font-['Switzer']">sofia.mendes@example.com</p>
             <p id="address" class="justify-start text-black text-base font-normal font-['Switzer']">Morada</p>
             <button id="edit" class="w-full h-9 bg-[#E5DCCA] rounded outline outline-1 outline-offset-[-1px] outline-[#3A4A5A] overflow-hidden flex items-center justify-center text-base font-bold text-[#3A4A5A] font-['Switzer']">Editar dados</button>
@@ -50,6 +51,7 @@
     <div class="bg-[#E5DCCA] rounded-2xl p-8 shadow-xl w-full max-w-md flex flex-col gap-4">
         <h3 class="text-[#3A4A5A] text-xl font-bold font-['Switzer'] mb-2">Editar Dados Pessoais</h3>
         <input id="edit-name" type="text" class="p-3 rounded bg-white text-black font-['Switzer']" placeholder="Nome" />
+        <input id="edit-age" type="number" min="0" class="p-3 rounded bg-white text-black font-['Switzer']" placeholder="Idade" />
         <input id="edit-email" type="email" class="p-3 rounded bg-white text-black font-['Switzer']" placeholder="Email" />
         <input id="edit-address" type="text" class="p-3 rounded bg-white text-black font-['Switzer']" placeholder="Morada" />
         <div class="flex gap-3 mt-4">
