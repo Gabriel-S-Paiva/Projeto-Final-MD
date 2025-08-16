@@ -1,12 +1,9 @@
 fetch('/Projeto-Final-MD/api/modules.php')
   .then(response => response.json())
   .then(modules => {
-    // Render modules in the catalog
     modules.forEach(module => {
-      console.log(module);
-      // Example: create a card for each module
       const card = document.createElement('div');
-      card.className = 'w-full bg-white rounded shadow flex flex-col gap-3 p-4 mb-4';
+      card.className = 'relative w-full bg-white rounded shadow flex flex-col gap-3 p-4 mb-4';
 
       const tags = module.tags ? module.tags.split(',').map(tag => tag.trim()) : [];
 
@@ -31,6 +28,47 @@ fetch('/Projeto-Final-MD/api/modules.php')
       card.addEventListener('click', () => {
         window.location.href = `./pages/product.php?id=${module.id}`;
       });
+      // Favorite icon
+      const favIcon = document.createElement('span');
+      favIcon.className = 'absolute top-3 right-3 cursor-pointer material-symbols-outlined text-2xl transition-colors';
+      favIcon.textContent = 'favorite';
+      favIcon.style.color = '#A5B5C0';
+
+      // Check if favorited
+      fetch(`/Projeto-Final-MD/api/session.php`)
+        .then(res => res.json())
+        .then(session => {
+          if (session.logged_in) {
+            fetch(`/Projeto-Final-MD/api/favorite.php?module_id=${module.id}`)
+              .then(res => res.json())
+              .then(data => {
+                favIcon.style.color = data.favorited ? '#3A4A5A' : '#A5B5C0';
+              });
+          }
+        });
+
+      favIcon.onclick = (e) => {
+        e.stopPropagation();
+        fetch('/Projeto-Final-MD/api/session.php')
+          .then(res => res.json())
+          .then(session => {
+            if (!session.logged_in) {
+              window.location.href = `/pages/login.php?redirect=${encodeURIComponent(window.location.pathname)}`;
+            } else {
+              fetch('/Projeto-Final-MD/api/favorite.php', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: `module_id=${module.id}`
+              })
+              .then(res => res.json())
+              .then(data => {
+                favIcon.style.color = data.favorited ? '#3A4A5A' : '#A5B5C0';
+              });
+            }
+          });
+      };
+
+      card.appendChild(favIcon);
       document.getElementById('catalog-list').appendChild(card);
     });
   });
