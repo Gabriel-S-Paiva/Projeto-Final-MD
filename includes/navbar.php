@@ -23,5 +23,17 @@
                 }
             });
         });
+        const cartIcon =  document.querySelector('#cart');
+        cartIcon.addEventListener('click', () => {
+            fetch('/Projeto-Final-MD/api/session.php')
+            .then(res => res.json())
+            .then(session => {
+                if (session.logged_in) {
+                    window.location.href = './pages/cart.php';
+                } else {
+                    window.location.href = './pages/login.php';
+                }
+            });
+        });
     });
 </script>
