@@ -272,7 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Logout logic
   document.getElementById('logout').onclick = () => {
-    fetch('/Projeto-Final-MD/api/logout.php')
+    fetch('/Projeto-Final-MD/api/userLogout.php')
       .then(res => res.json())
       .then(() => {
         window.location.href = '/Projeto-Final-MD/pages/login.php';

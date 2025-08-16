@@ -38,14 +38,18 @@ document.getElementById('login-form').addEventListener('submit', function(e) {
   })
   .then(res => res.json())
   .then(data => {
-    const msg = document.getElementById('login-msg');
-    if (data.success) {
-      msg.textContent = 'Login efetuado com sucesso!';
-      msg.className = 'text-green-600 mt-2';
-      window.location.href = '/Projeto-Final-MD/index.php';
-    } else {
-      msg.textContent = data.error || 'Erro ao entrar.';
-      msg.className = 'text-red-600 mt-2';
-    }
-  });
+      const msg = document.getElementById('login-msg');
+      if (data.success) {
+        msg.textContent = 'Login efetuado com sucesso!';
+        msg.className = 'text-green-600 mt-2';
+        if (data.role === 'admin') {
+          window.location.href = '/Projeto-Final-MD/pages/admin.php';
+        } else {
+          window.location.href = '/Projeto-Final-MD/index.php';
+        }
+      } else {
+        msg.textContent = data.error || 'Erro ao entrar.';
+        msg.className = 'text-red-600 mt-2';
+      }
+    })
 });

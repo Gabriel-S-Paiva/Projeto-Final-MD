@@ -17,9 +17,13 @@
             .then(res => res.json())
             .then(session => {
                 if (session.logged_in) {
-                    window.location.href = './pages/profile.php';
+                if (session.role === 'admin') {
+                    window.location.href = './pages/admin.php';
                 } else {
-                    window.location.href = './pages/login.php';
+                    window.location.href = './pages/profile.php';
+                }
+                } else {
+                window.location.href = './pages/login.php';
                 }
             });
         });
