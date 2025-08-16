@@ -19,89 +19,114 @@ function renderCart() {
       let subtotal = 0;
       items.forEach(item => {
         const price = Number(item.price);
-        subtotal += price * item.quantity;
+        subtotal += price * Number(item.quantity);
 
+        // Card wrapper
         const wrapper = document.createElement('div');
-        wrapper.className = 'flex items-center gap-4 mb-4';
+        wrapper.className = 'flex flex-col sm:flex-row items-center gap-6 mb-6 bg-white rounded-2xl shadow p-4';
 
+        // Product image (left, bigger)
         const img = document.createElement('img');
         img.src = item.image;
         img.alt = item.name;
-        img.className = 'w-32 h-32 object-cover rounded-lg bg-[#E5DCCA]';
+        img.className = 'w-40 h-40 object-cover rounded-xl bg-[#E5DCCA]';
 
+        // Info column (right)
         const info = document.createElement('div');
-        info.className = 'flex-1 flex flex-col justify-between h-24';
+        info.className = 'flex-1 flex flex-col justify-between h-40 w-full';
 
+        // Name (top right)
         const name = document.createElement('span');
-        name.className = 'font-bold text-lg text-[#3A4A5A] font-[Unispace]';
+        name.className = 'font-bold text-xl text-[#3A4A5A] font-[Unispace] mb-2';
         name.textContent = item.name;
 
-        const variant = document.createElement('span');
-        variant.className = 'text-sm text-[#2E2E2E] font-[Switzer]';
-        variant.textContent = `${item.color} ${item.width}x${item.height}x${item.depth}`;
-
+        // Bottom row: price left, quantity controls right
         const bottom = document.createElement('div');
-        bottom.className = 'flex justify-between items-end w-full mt-auto';
+        bottom.className = 'flex flex-col sm:flex-row items-end w-full mt-auto justify-between gap-2';
 
+        // Price (bottom left)
         const priceSpan = document.createElement('span');
-        priceSpan.className = 'text-base font-bold text-[#3A4A5A] font-[Switzer]';
+        priceSpan.className = 'text-lg font-bold text-[#3A4A5A] font-[Switzer]';
         priceSpan.textContent = `€${price.toFixed(2)}`;
 
-        // Quantity controls
+        // Quantity controls (bottom right, far right, responsive)
         const qtyControls = document.createElement('div');
-        qtyControls.className = 'flex items-center gap-2';
+        qtyControls.className = 'flex items-center gap-2 ml-auto';
 
         const decBtn = document.createElement('button');
-        decBtn.className = 'decrement bg-[#E5DCCA] rounded px-2 py-1 text-[#3A4A5A] font-bold';
+        decBtn.className = 'decrement bg-transparent hover:bg-[#E5DCCA] rounded px-3 py-1 text-[#3A4A5A] font-bold text-lg transition-colors';
         decBtn.textContent = '-';
 
         const qtyInput = document.createElement('input');
         qtyInput.type = 'number';
         qtyInput.min = '1';
         qtyInput.value = item.quantity;
-        qtyInput.className = 'quantity w-12 text-center rounded border border-[#A5B5C0] font-[Switzer]';
+        qtyInput.className = 'quantity w-14 text-center rounded border border-[#A5B5C0] font-[Switzer] text-base';
 
         const incBtn = document.createElement('button');
-        incBtn.className = 'increment bg-[#E5DCCA] rounded px-2 py-1 text-[#3A4A5A] font-bold';
+        incBtn.className = 'increment bg-transparent hover:bg-[#E5DCCA] rounded px-3 py-1 text-[#3A4A5A] font-bold text-lg transition-colors';
         incBtn.textContent = '+';
+
+        // Remove button (Material Symbols, outlined, red, bg on hover)
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'ml-2 bg-transparent hover:bg-[#E5DCCA] rounded-full p-2 transition-colors flex items-center justify-center';
+        removeBtn.title = 'Remover';
+        removeBtn.innerHTML = `<span class="material-symbols-outlined text-2xl text-[#E53935]">delete</span>`;
+
+        removeBtn.onclick = () => {
+            fetch('/Projeto-Final-MD/api/cart.php', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: `remove_cart_item_id=${item.id}`
+            })
+            .then(res => res.json())
+            .then(data => {
+            if (data.success) {
+                showToast('Item removido do carrinho!');
+                renderCart();
+            } else {
+                showToast(data.error || 'Erro ao remover item.', false);
+            }
+            });
+        };
 
         // Quantity update logic
         function updateQty(newQty) {
-          fetch('/Projeto-Final-MD/api/cart.php', {
+            fetch('/Projeto-Final-MD/api/cart.php', {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: `cart_item_id=${item.id}&quantity=${newQty}`
-          })
-          .then(res => res.json())
-          .then(data => {
+            })
+            .then(res => res.json())
+            .then(data => {
             if (data.success) {
-              qtyInput.value = newQty;
-              renderCart();
+                qtyInput.value = newQty;
+                renderCart();
             } else {
-              showToast(data.error || 'Erro ao atualizar quantidade', false);
+                showToast(data.error || 'Erro ao atualizar quantidade', false);
             }
-          });
+            });
         }
 
         decBtn.onclick = () => {
-          let val = Math.max(1, Number(qtyInput.value) - 1);
-          updateQty(val);
+            let val = Math.max(1, Number(qtyInput.value) - 1);
+            updateQty(val);
         };
         incBtn.onclick = () => {
-          let val = Number(qtyInput.value) + 1;
-          updateQty(val);
+            let val = Number(qtyInput.value) + 1;
+            updateQty(val);
         };
         qtyInput.onchange = () => {
-          let val = Math.max(1, Number(qtyInput.value));
-          updateQty(val);
+            let val = Math.max(1, Number(qtyInput.value));
+            updateQty(val);
         };
 
-        qtyControls.append(decBtn, qtyInput, incBtn);
+        qtyControls.append(decBtn, qtyInput, incBtn, removeBtn);
         bottom.append(priceSpan, qtyControls);
-        info.append(name, variant, bottom);
+        info.append(name, bottom);
         wrapper.append(img, info);
         cartDiv.appendChild(wrapper);
-      });
+        });
 
       // Update subtotal, envio, total
       document.querySelectorAll('.self-stretch.inline-flex.justify-between.items-start span')[0].textContent = `€${subtotal.toFixed(2)}`;

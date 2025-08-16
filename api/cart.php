@@ -25,8 +25,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
     $user_id = $_SESSION['user_id'];
-
+        if (isset($_POST['remove_cart_item_id'])) {
+        $cart_item_id = intval($_POST['remove_cart_item_id']);
+        $stmt = $pdo->prepare("DELETE FROM cart_items WHERE id = ?");
+        $stmt->execute([$cart_item_id]);
+        echo json_encode(['success' => true]);
+        exit;
+    }
     // Add to cart
     if (isset($_POST['variant_id']) && isset($_POST['quantity'])) {
         $variant_id = intval($_POST['variant_id']);

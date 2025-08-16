@@ -19,7 +19,7 @@
     <h1 class="hidden">Komodu - Carrinho</h1>
     <main class="w-full flex flex-col items-start gap-5 px-4 py-2 md:px-20 md:py-10">
         <h2 class="text-[#3A4A5A] text-4xl font-bold font-['Unispace']">Carrinho</h2>
-        <div id="load-cart">
+        <div id="load-cart" class="w-full">
 
         </div>
         <hr>
@@ -37,7 +37,7 @@
         </div>
         <button id="buy-cart" class="w-full bg-[#3A4A5A] h-9 rounded overflow-hidden flex items-center justify-center text-[#E5DCCA] text-base font-bold font-['Switzer']">Finalizar compra</button>
     </main>
-    <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-[#3A4A5A] text-white font-['Switzer'] px-6 py-3 rounded-lg shadow-lg opacity-0 pointer-events-none transition-all duration-300 z-50"></div>
+    <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-[#3A4A5A] text-white font-['Switzer'] px-6 py-3 rounded-lg shadow-lg opacity-0 pointer-events-none transition-all duration-300 z-[9999]"></div>
     <?php include '../includes/footer.php'; ?>
     <script src="Js/cartView.js"></script>
 </body>
