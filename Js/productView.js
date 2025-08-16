@@ -155,7 +155,7 @@ document.querySelector('#add-cart').addEventListener('click', () => {
     .then(res => res.json())
     .then(session => {
       if (!session.logged_in) {
-        window.location.href = `/pages/login.php?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`;
+        window.location.href = `pages/login.php?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`;
       } else {
         fetch('/Projeto-Final-MD/api/cart.php', {
           method: 'POST',

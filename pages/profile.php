@@ -31,7 +31,7 @@
 
         <div class="self-stretch px-2.5 py-3.5 bg-[#E5DCCA] rounded-lg inline-flex flex-col justify-start items-start gap-2.5 overflow-hidden">
             <h3 class="w-full justify-start text-[#3A4A5A] text-xl font-bold font-['Switzer']">Os meus favoritos</h3>
-            <div id="modulos-container" class="w-96 min-h-12 inline-flex justify-start items-start gap-2.5">
+            <div id="fav-container" class="w-96 min-h-12 inline-flex justify-start items-start gap-2.5">
 
             </div>
         </div>
