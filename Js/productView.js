@@ -8,6 +8,18 @@ let selectedColor = null;
 let selectedSize = null;
 let productData = null;
 
+function showToast(message, success = true) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.style.background = success ? '#3A4A5A' : '#A5B5C0';
+  toast.style.opacity = '1';
+  toast.style.pointerEvents = 'auto';
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.pointerEvents = 'none';
+  }, 2000);
+}
+
 // Fetch product and variants
 fetch(`/Projeto-Final-MD/api/modules.php?id=${productId}`)
   .then(res => res.json())
@@ -127,12 +139,18 @@ document.addEventListener('DOMContentLoaded', updateFavoriteIcon);
 
 // Add to cart logic
 document.querySelector('#add-cart').addEventListener('click', () => {
-  if (!selectedColor || !selectedSize || !productData) return alert('Selecione cor e tamanho!');
+  if (!selectedColor || !selectedSize || !productData) {
+    showToast('Selecione cor e tamanho!', false);
+    return;
+  }
   const variant = productData.variants.find(v =>
     v.color === selectedColor &&
     `${v.width}x${v.height}x${v.depth}` === selectedSize
   );
-  if (!variant) return alert('Variante inválida!');
+  if (!variant) {
+    showToast('Variante inválida!', false);
+    return;
+  }
   fetch('/Projeto-Final-MD/api/session.php')
     .then(res => res.json())
     .then(session => {
@@ -147,9 +165,9 @@ document.querySelector('#add-cart').addEventListener('click', () => {
         .then(res => res.json())
         .then(data => {
           if (data.success) {
-            alert('Adicionado ao carrinho!');
+            showToast('Adicionado ao carrinho!');
           } else {
-            alert(data.error || 'Erro ao adicionar ao carrinho.');
+            showToast(data.error || 'Erro ao adicionar ao carrinho.', false);
           }
         });
       }

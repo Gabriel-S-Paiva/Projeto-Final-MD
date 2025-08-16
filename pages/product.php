@@ -42,6 +42,8 @@
             <a href="./pages/simulator.php" class="w-full h-9 bg-[#E5DCCA] rounded outline outline-1 outline-offset-[-1px] outline-[#3A4A5A] overflow-hidden flex items-center justify-center text-base font-bold text-[#3A4A5A] font-['Switzer']">Simular no espaço</a>
         </div>
     </main>
+    <!-- Toast notification container -->
+    <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-[#3A4A5A] text-white font-['Switzer'] px-6 py-3 rounded-lg shadow-lg opacity-0 pointer-events-none transition-all duration-300 z-50"></div>
     <?php include '../includes/footer.php'; ?>
     <script src="Js/productView.js"></script>
 </body>
