@@ -14,9 +14,9 @@ $user = $stmt->fetch();
 if ($user && password_verify($password, $user['password_hash'])) {
     $_SESSION['user_id'] = $user['id'];
     $_SESSION['username'] = $user['username'];
+    $_SESSION['role'] = $user['role']; // <-- Add this line
     echo json_encode(['success' => true, 'role' => $user['role']]);
 } else {
     http_response_code(401);
     echo json_encode(['error' => 'Credenciais inválidas.']);
 }
-?>
