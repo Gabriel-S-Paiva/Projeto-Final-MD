@@ -11,7 +11,6 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 $action = $_GET['action'] ?? $_POST['action'] ?? '';
 
 if ($action === 'deliveries') {
-    // Get all completed carts/orders
     $stmt = $pdo->query("SELECT o.id, o.user_id, o.date, u.name as user_name, o.total FROM orders o JOIN users u ON o.user_id = u.id ORDER BY o.date DESC");
     $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
     foreach ($orders as &$order) {
@@ -29,12 +28,73 @@ if ($action === 'products') {
     exit;
 }
 
+if ($action === 'add_product') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    $stmt = $pdo->prepare("INSERT INTO modules (name, image, width, height, depth, stock, price) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->execute([
+        $data['name'], $data['image'], $data['width'], $data['height'], $data['depth'], $data['stock'], $data['price']
+    ]);
+    echo json_encode(['success' => true]);
+    exit;
+}
+
+if ($action === 'edit_product') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    $stmt = $pdo->prepare("UPDATE modules SET name=?, image=?, width=?, height=?, depth=?, stock=?, price=? WHERE id=?");
+    $stmt->execute([
+        $data['name'], $data['image'], $data['width'], $data['height'], $data['depth'], $data['stock'], $data['price'], $data['id']
+    ]);
+    echo json_encode(['success' => true]);
+    exit;
+}
+
+if ($action === 'delete_product') {
+    $id = intval($_POST['id'] ?? $_GET['id'] ?? 0);
+    $stmt = $pdo->prepare("DELETE FROM modules WHERE id=?");
+    $stmt->execute([$id]);
+    echo json_encode(['success' => true]);
+    exit;
+}
+
+if ($action === 'restock_product') {
+    $id = intval($_POST['id'] ?? $_GET['id'] ?? 0);
+    $amount = intval($_POST['amount'] ?? $_GET['amount'] ?? 1);
+    $stmt = $pdo->prepare("UPDATE modules SET stock = stock + ? WHERE id=?");
+    $stmt->execute([$amount, $id]);
+    echo json_encode(['success' => true]);
+    exit;
+}
+
 if ($action === 'users') {
     $stmt = $pdo->query("SELECT id, username, name, email, role, age FROM users");
     echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
     exit;
 }
 
-// Add/edit/delete/restock products, edit/delete/change role users, etc.
-// Implement each action as needed, always returning JSON and updating DB.
+if ($action === 'edit_user') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    $stmt = $pdo->prepare("UPDATE users SET name=?, email=?, age=?, role=? WHERE id=?");
+    $stmt->execute([
+        $data['name'], $data['email'], $data['age'], $data['role'], $data['id']
+    ]);
+    echo json_encode(['success' => true]);
+    exit;
+}
+
+if ($action === 'delete_user') {
+    $id = intval($_POST['id'] ?? $_GET['id'] ?? 0);
+    $stmt = $pdo->prepare("DELETE FROM users WHERE id=?");
+    $stmt->execute([$id]);
+    echo json_encode(['success' => true]);
+    exit;
+}
+
+if ($action === 'change_role') {
+    $id = intval($_POST['id'] ?? $_GET['id'] ?? 0);
+    $role = $_POST['role'] ?? $_GET['role'] ?? 'user';
+    $stmt = $pdo->prepare("UPDATE users SET role=? WHERE id=?");
+    $stmt->execute([$role, $id]);
+    echo json_encode(['success' => true]);
+    exit;
+}
 ?>
