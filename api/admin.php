@@ -24,15 +24,23 @@ if ($action === 'deliveries') {
 
 if ($action === 'products') {
     $stmt = $pdo->query("SELECT * FROM modules");
-    echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+    $modules = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($modules as &$mod) {
+        $variantStmt = $pdo->prepare("SELECT * FROM variants WHERE module_id = ?");
+        $variantStmt->execute([$mod['id']]);
+        $mod['variants'] = $variantStmt->fetchAll(PDO::FETCH_ASSOC);
+        $mod['stock'] = array_sum(array_column($mod['variants'], 'stock'));
+    }
+    echo json_encode($modules);
     exit;
 }
 
 if ($action === 'add_product') {
     $data = json_decode(file_get_contents('php://input'), true);
-    $stmt = $pdo->prepare("INSERT INTO modules (name, image, width, height, depth, stock, price) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $pdo->prepare("INSERT INTO modules (name, image, width, height, depth, description, type, color, compatible_with, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt->execute([
-        $data['name'], $data['image'], $data['width'], $data['height'], $data['depth'], $data['stock'], $data['price']
+        $data['name'], $data['image'], $data['width'], $data['height'], $data['depth'],
+        $data['description'] ?? '', $data['type'] ?? '', $data['color'] ?? '', $data['compatible_with'] ?? '', $data['price']
     ]);
     echo json_encode(['success' => true]);
     exit;
@@ -40,9 +48,10 @@ if ($action === 'add_product') {
 
 if ($action === 'edit_product') {
     $data = json_decode(file_get_contents('php://input'), true);
-    $stmt = $pdo->prepare("UPDATE modules SET name=?, image=?, width=?, height=?, depth=?, stock=?, price=? WHERE id=?");
+    $stmt = $pdo->prepare("UPDATE modules SET name=?, image=?, width=?, height=?, depth=?, description=?, type=?, color=?, compatible_with=?, price=? WHERE id=?");
     $stmt->execute([
-        $data['name'], $data['image'], $data['width'], $data['height'], $data['depth'], $data['stock'], $data['price'], $data['id']
+        $data['name'], $data['image'], $data['width'], $data['height'], $data['depth'],
+        $data['description'] ?? '', $data['type'] ?? '', $data['color'] ?? '', $data['compatible_with'] ?? '', $data['price'], $data['id']
     ]);
     echo json_encode(['success' => true]);
     exit;
@@ -59,8 +68,38 @@ if ($action === 'delete_product') {
 if ($action === 'restock_product') {
     $id = intval($_POST['id'] ?? $_GET['id'] ?? 0);
     $amount = intval($_POST['amount'] ?? $_GET['amount'] ?? 1);
-    $stmt = $pdo->prepare("UPDATE modules SET stock = stock + ? WHERE id=?");
+    // Restock all variants for this module
+    $stmt = $pdo->prepare("UPDATE variants SET stock = stock + ? WHERE module_id=?");
     $stmt->execute([$amount, $id]);
+    echo json_encode(['success' => true]);
+    exit;
+}
+
+if ($action === 'restock_variant') {
+    $id = intval($_POST['id'] ?? $_GET['id'] ?? 0);
+    $amount = intval($_POST['amount'] ?? $_GET['amount'] ?? 1);
+    $stmt = $pdo->prepare("UPDATE variants SET stock = stock + ? WHERE id=?");
+    $stmt->execute([$amount, $id]);
+    echo json_encode(['success' => true]);
+    exit;
+}
+
+if ($action === 'edit_variant') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    $stmt = $pdo->prepare("UPDATE variants SET color=?, width=?, height=?, depth=?, stock=?, price=? WHERE id=?");
+    $stmt->execute([
+        $data['color'], $data['width'], $data['height'], $data['depth'], $data['stock'], $data['price'], $data['id']
+    ]);
+    echo json_encode(['success' => true]);
+    exit;
+}
+
+if ($action === 'add_variant') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    $stmt = $pdo->prepare("INSERT INTO variants (module_id, color, width, height, depth, stock, price) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->execute([
+        $data['module_id'], $data['color'], $data['width'], $data['height'], $data['depth'], $data['stock'], $data['price']
+    ]);
     echo json_encode(['success' => true]);
     exit;
 }
@@ -81,11 +120,25 @@ if ($action === 'edit_user') {
     exit;
 }
 
+
 if ($action === 'delete_user') {
     $id = intval($_POST['id'] ?? $_GET['id'] ?? 0);
+
+    // Delete related records
+    $pdo->prepare("DELETE FROM order_items WHERE order_id IN (SELECT id FROM orders WHERE user_id=?)")->execute([$id]);
+    $pdo->prepare("DELETE FROM orders WHERE user_id=?")->execute([$id]);
+    $pdo->prepare("DELETE FROM cart_items WHERE cart_id IN (SELECT id FROM cart WHERE user_id=?)")->execute([$id]);
+    $pdo->prepare("DELETE FROM cart WHERE user_id=?")->execute([$id]);
+    $pdo->prepare("DELETE FROM favorites WHERE user_id=?")->execute([$id]);
+    $pdo->prepare("DELETE FROM simulations WHERE user_id=?")->execute([$id]);
+    // Now delete the user
     $stmt = $pdo->prepare("DELETE FROM users WHERE id=?");
-    $stmt->execute([$id]);
-    echo json_encode(['success' => true]);
+    if ($stmt->execute([$id])) {
+        echo json_encode(['success' => true]);
+    } else {
+        http_response_code(500);
+        echo json_encode(['error' => 'Erro ao eliminar utilizador.']);
+    }
     exit;
 }
 

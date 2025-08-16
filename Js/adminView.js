@@ -12,6 +12,7 @@ function loadDeliveries() {
       const container = document.getElementById('deliveries-list');
       container.innerHTML = '';
       data.forEach(delivery => {
+        const items = Array.isArray(delivery.items) ? delivery.items : [];
         const card = document.createElement('div');
         card.className = 'mb-4 p-4 bg-[#F9F9F9] rounded-lg shadow flex flex-col gap-2';
         card.innerHTML = `
@@ -19,8 +20,8 @@ function loadDeliveries() {
             <span class="font-bold text-[#3A4A5A]">${delivery.user_name}</span>
             <span class="text-xs text-[#A5B5C0]">${delivery.date}</span>
           </div>
-          <div class="text-sm text-[#2E2E2E]">Produtos: ${delivery.items.map(i => i.name + ' x' + i.quantity).join(', ')}</div>
-          <div class="text-sm text-[#2E2E2E]">Total: €${delivery.total.toFixed(2)}</div>
+          <div class="text-sm text-[#2E2E2E]">Produtos: ${items.length ? items.map(i => i.name + ' x' + i.quantity).join(', ') : 'Nenhum produto'}</div>
+          <div class="text-sm text-[#2E2E2E]">Total: €${Number(delivery.total).toFixed(2)}</div>
         `;
         container.appendChild(card);
       });
@@ -35,6 +36,14 @@ function loadProducts() {
       const container = document.getElementById('product-management');
       container.innerHTML = '';
       products.forEach(mod => {
+        const variantsHtml = mod.variants.map(v => `
+          <div class="flex items-center gap-2 text-xs mb-1">
+            <span class="block px-2 py-1 rounded bg-[#A5B5C0] text-[#3A4A5A]">${v.color || 'Variante'} (${v.width}x${v.height}x${v.depth})</span>
+            <span class="block text-[#2E2E2E]">Stock: ${v.stock}</span>
+            <button class="bg-[#A5B5C0] text-[#3A4A5A] px-2 py-1 rounded" onclick="restockVariant(${v.id})">Restock</button>
+            <button class="bg-[#3A4A5A] text-white px-2 py-1 rounded" onclick="editVariant(${v.id})">Editar</button>
+          </div>
+        `).join('');
         const card = document.createElement('div');
         card.className = 'mb-4 p-4 bg-white rounded-lg shadow flex flex-col gap-2 border border-[#A5B5C0]';
         card.innerHTML = `
@@ -43,14 +52,15 @@ function loadProducts() {
             <div>
               <span class="font-bold text-[#3A4A5A]">${mod.name}</span>
               <span class="block text-xs text-[#2E2E2E]">${mod.width}x${mod.height}x${mod.depth}</span>
-              <span class="block text-xs text-[#A5B5C0]">Stock: ${mod.stock}</span>
+              <span class="block text-xs text-[#A5B5C0]">Stock total: ${mod.stock}</span>
               <span class="block text-xs text-[#A5B5C0]">Preço: €${mod.price}</span>
+              <div class="mt-2">${variantsHtml}</div>
             </div>
           </div>
           <div class="flex gap-2 mt-2 flex-wrap">
             <button class="bg-[#3A4A5A] text-white px-3 py-1 rounded" onclick="editProduct(${mod.id})">Editar</button>
             <button class="bg-[#E53935] text-white px-3 py-1 rounded" onclick="deleteProduct(${mod.id})">Eliminar</button>
-            <button class="bg-[#A5B5C0] text-[#3A4A5A] px-3 py-1 rounded" onclick="restockProduct(${mod.id})">Restock</button>
+            <button class="bg-[#A5B5C0] text-[#3A4A5A] px-3 py-1 rounded" onclick="showVariantModal(${mod.id})">Adicionar Variante</button>
           </div>
         `;
         container.appendChild(card);
@@ -94,24 +104,75 @@ window.editProduct = function(id) {
 };
 
 window.deleteProduct = function(id) {
-  if (confirm('Eliminar este produto?')) {
+  const modal = document.createElement('div');
+  modal.className = 'fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40';
+  modal.innerHTML = `
+    <div class="bg-[#E5DCCA] rounded-2xl p-8 shadow-xl w-full max-w-sm flex flex-col gap-4 items-center">
+      <span class="material-symbols-outlined text-[#E53935] text-4xl mb-2">warning</span>
+      <h3 class="text-[#3A4A5A] text-xl font-bold mb-2">Eliminar Produto?</h3>
+      <p class="text-[#2E2E2E] text-base mb-4">Tem a certeza que quer eliminar este produto?</p>
+      <div class="flex gap-3 w-full">
+        <button id="confirm-product-delete" class="flex-1 bg-[#E53935] text-white font-bold rounded h-10">Eliminar</button>
+        <button id="cancel-product-delete" class="flex-1 bg-[#E5DCCA] outline outline-1 outline-[#3A4A5A] text-[#3A4A5A] font-bold rounded h-10">Cancelar</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  document.getElementById('cancel-product-delete').onclick = () => modal.remove();
+  document.getElementById('confirm-product-delete').onclick = () => {
     fetch('/Projeto-Final-MD/api/admin.php?action=delete_product', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `id=${id}`
-    }).then(res => res.json()).then(() => loadProducts());
-  }
+    }).then(res => res.json()).then(() => {
+      loadProducts();
+      modal.remove();
+    });
+  };
 };
 
-window.restockProduct = function(id) {
+window.restockVariant = function(id) {
   const amount = prompt('Quantidade para restock:', '1');
   if (amount && !isNaN(amount)) {
-    fetch('/Projeto-Final-MD/api/admin.php?action=restock_product', {
+    fetch('/Projeto-Final-MD/api/admin.php?action=restock_variant', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `id=${id}&amount=${amount}`
     }).then(res => res.json()).then(() => loadProducts());
   }
+};
+
+window.editVariant = function(id) {
+  fetch('/Projeto-Final-MD/api/admin.php?action=products')
+    .then(res => res.json())
+    .then(products => {
+      let variant;
+      products.forEach(mod => {
+        variant = (mod.variants || []).find(v => v.id == id) || variant;
+      });
+      if (!variant) return;
+      showModal('Editar Variante', variant, (data) => {
+        data.id = id;
+        fetch('/Projeto-Final-MD/api/admin.php?action=edit_variant', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(data)
+        }).then(res => res.json()).then(() => loadProducts());
+      });
+    });
+};
+
+window.showVariantModal = function(module_id) {
+  showModal('Adicionar Variante', {
+    module_id, color: '', width: '', height: '', depth: '', stock: '', price: ''
+  }, (data) => {
+    fetch('/Projeto-Final-MD/api/admin.php?action=add_variant', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data)
+    }).then(res => res.json()).then(() => loadProducts());
+  });
 };
 
 // User Management
