@@ -132,9 +132,19 @@ Projeto-Final-MD/
 └── includes/                 # Componentes partilhados
 ```
 
-### **5. Acesso ao Site**
+
+### **5. Acesso ao Site e Login**
 - **URL Base**: `http://localhost/Projeto-Final-MD/`
-- **Admin**: `http://localhost/Projeto-Final-MD/pages/admin.php`
+- **Admin Dashboard**: `http://localhost/Projeto-Final-MD/pages/admin.php`
+
+#### **Login de Utilizador**
+- Registe-se ou faça login na área de cliente para aceder a funcionalidades como favoritos, simulações e histórico de compras.
+
+#### **Login de Administrador**
+- Para aceder ao painel administrativo faça login como:
+   - **Utilizador:** `admin`
+   - **Password:** `admin`
+- Após login, terá acesso à gestão de produtos, utilizadores e histórico de entregas.
 
 ---
 
