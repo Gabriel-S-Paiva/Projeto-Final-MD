@@ -45,7 +45,7 @@
 
         <!-- Simulator Section -->
         <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div class="p-6 flex flex-col gap-6 rounded-2xl bg-[#A5B5C0] md:p-8">
+            <div class="p-6 flex flex-col gap-6 rounded-2xl bg-[#E5DCCA] md:p-8">
                 <h3 class="text-[#3A4A5A] text-xl md:text-2xl font-bold font-['Switzer']">Planeie o seu espaço facilmente</h3>
                 <p class="font-['Switzer'] text-black text-base md:text-lg leading-relaxed">Use o nosso simulador para testar módulos no seu espaço. Ajuste, combine e visualize antes de comprar</p>
                 <a href="./pages/simulator.php" class="bg-[#3A4A5A] h-12 rounded-lg overflow-hidden flex items-center justify-center text-[#E5DCCA] text-base font-bold font-['Switzer'] hover:bg-[#2E2E2E] transition-colors">Começar a planear</a>

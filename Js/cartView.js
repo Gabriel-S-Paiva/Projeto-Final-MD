@@ -17,60 +17,86 @@ function renderCart() {
       const cartDiv = document.getElementById('load-cart');
       cartDiv.innerHTML = '';
       let subtotal = 0;
+      
+      if (!items || items.length === 0) {
+        cartDiv.innerHTML = `
+          <div class="flex flex-col items-center justify-center p-12 bg-white rounded-2xl shadow-lg text-center">
+            <span class="material-symbols-outlined text-6xl text-[#A5B5C0] mb-4">shopping_cart</span>
+            <h3 class="text-xl font-bold text-[#3A4A5A] font-['Switzer'] mb-2">Carrinho vazio</h3>
+            <p class="text-gray-600 font-['Switzer'] mb-6">Adicione produtos ao seu carrinho para continuar</p>
+            <a href="./pages/catalog.php" class="bg-[#3A4A5A] text-white px-6 py-3 rounded-lg font-bold font-['Switzer'] hover:bg-[#2E2E2E] transition-colors">
+              Ver Produtos
+            </a>
+          </div>
+        `;
+        
+        // Update totals to zero
+        const subtotalElement = document.getElementById('subtotal');
+        const totalElement = document.getElementById('total');
+        
+        if (subtotalElement) {
+          subtotalElement.textContent = '€0.00';
+        }
+        if (totalElement) {
+          totalElement.textContent = '€50.00';
+        }
+        return;
+      }
+      
       items.forEach(item => {
         const price = Number(item.price);
         subtotal += price * Number(item.quantity);
 
         // Card wrapper
         const wrapper = document.createElement('div');
-        wrapper.className = 'flex flex-col sm:flex-row items-center gap-6 mb-6 bg-white rounded-2xl shadow p-4';
+        wrapper.className = 'flex flex-col sm:flex-row items-start gap-4 mb-6 bg-white rounded-2xl shadow-lg p-6';
 
-        // Product image (left, bigger)
+        // Product image
         const img = document.createElement('img');
         img.src = item.image;
         img.alt = item.name;
-        img.className = 'w-40 h-40 object-cover rounded-xl bg-[#E5DCCA]';
+        img.className = 'w-full sm:w-40 h-40 object-cover rounded-xl bg-[#E5DCCA] flex-shrink-0';
 
-        // Info column (right)
+        // Info column
         const info = document.createElement('div');
-        info.className = 'flex-1 flex flex-col justify-between h-40 w-full';
+        info.className = 'flex-1 flex flex-col justify-between min-h-[160px] w-full';
 
-        // Name (top right)
-        const name = document.createElement('span');
-        name.className = 'font-bold text-xl text-[#3A4A5A] font-[Unispace] mb-2';
+        // Name
+        const name = document.createElement('h3');
+        name.className = 'font-bold text-xl text-[#3A4A5A] font-["Unispace"] mb-4';
         name.textContent = item.name;
 
-        // Bottom row: price left, quantity controls right
+        // Bottom row: price and quantity controls
         const bottom = document.createElement('div');
-        bottom.className = 'flex flex-col sm:flex-row items-end w-full mt-auto justify-between gap-2';
+        bottom.className = 'flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mt-auto';
 
-        // Price (bottom left)
+        // Price
         const priceSpan = document.createElement('span');
-        priceSpan.className = 'text-lg font-bold text-[#3A4A5A] font-[Switzer]';
+        priceSpan.className = 'text-xl font-bold text-[#3A4A5A] font-["Switzer"]';
         priceSpan.textContent = `€${price.toFixed(2)}`;
 
-        // Quantity controls (bottom right, far right, responsive)
+        // Quantity controls container
         const qtyControls = document.createElement('div');
-        qtyControls.className = 'flex items-center gap-2 ml-auto';
+        qtyControls.className = 'flex items-center gap-3';
 
         const decBtn = document.createElement('button');
-        decBtn.className = 'decrement bg-transparent hover:bg-[#E5DCCA] rounded px-3 py-1 text-[#3A4A5A] font-bold text-lg transition-colors';
+        decBtn.className = 'decrement bg-[#E5DCCA] hover:bg-[#A5B5C0] rounded-lg px-3 py-2 text-[#3A4A5A] font-bold text-lg transition-colors';
         decBtn.textContent = '-';
 
         const qtyInput = document.createElement('input');
         qtyInput.type = 'number';
         qtyInput.min = '1';
         qtyInput.value = item.quantity;
-        qtyInput.className = 'quantity w-14 text-center rounded border border-[#A5B5C0] font-[Switzer] text-base';
+        qtyInput.className = 'quantity w-16 h-10 text-center rounded-lg border-2 border-[#A5B5C0] font-["Switzer"] text-base';
 
         const incBtn = document.createElement('button');
-        incBtn.className = 'increment bg-transparent hover:bg-[#E5DCCA] rounded px-3 py-1 text-[#3A4A5A] font-bold text-lg transition-colors';
+        incBtn.className = 'increment bg-[#E5DCCA] hover:bg-[#A5B5C0] rounded-lg px-3 py-2 text-[#3A4A5A] font-bold text-lg transition-colors';
         incBtn.textContent = '+';
 
-        // Remove button (Material Symbols, outlined, red, bg on hover)
+        // Remove button
         const removeBtn = document.createElement('button');
-        removeBtn.className = 'ml-2 bg-transparent hover:bg-[#E5DCCA] rounded-full p-2 transition-colors flex items-center justify-center';
-        removeBtn.title = 'Remover';
+        removeBtn.className = 'ml-3 bg-transparent hover:bg-red-50 rounded-full p-2 transition-colors flex items-center justify-center';
+        removeBtn.title = 'Remover item';
         removeBtn.innerHTML = `<span class="material-symbols-outlined text-2xl text-[#E53935]">delete</span>`;
 
         removeBtn.onclick = () => {
@@ -128,9 +154,16 @@ function renderCart() {
         cartDiv.appendChild(wrapper);
         });
 
-      // Update subtotal, envio, total
-      document.querySelectorAll('.self-stretch.inline-flex.justify-between.items-start span')[0].textContent = `€${subtotal.toFixed(2)}`;
-      document.querySelectorAll('.self-stretch.inline-flex.justify-between.items-start span')[2].textContent = `€${(subtotal + 50).toFixed(2)}`;
+      // Update subtotal and total using the new IDs
+      const subtotalElement = document.getElementById('subtotal');
+      const totalElement = document.getElementById('total');
+      
+      if (subtotalElement) {
+        subtotalElement.textContent = `€${subtotal.toFixed(2)}`;
+      }
+      if (totalElement) {
+        totalElement.textContent = `€${(subtotal + 50).toFixed(2)}`;
+      }
     });
 }
 renderCart();

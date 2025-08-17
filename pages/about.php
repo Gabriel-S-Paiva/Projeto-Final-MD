@@ -37,7 +37,7 @@
             </div>
 
             <!-- Os nossos valores -->
-            <div class="w-full p-5 flex flex-col gap-4 rounded-2xl bg-[#A5B5C0] md:p-8">
+            <div class="w-full p-5 flex flex-col gap-4 rounded-2xl bg-[#E5DCCA] md:p-8">
                 <h2 class="text-[#3A4A5A] text-xl md:text-2xl font-bold font-['Switzer']">Os nossos valores</h2>
                 <div class="flex flex-col gap-3">
                     <div>
@@ -61,9 +61,9 @@
         </div>
 
         <!-- Innovation Section -->
-        <div class="w-full p-5 flex flex-col gap-4 rounded-2xl bg-[#3A4A5A] text-white md:p-8">
-            <h2 class="text-white text-xl md:text-2xl font-bold font-['Switzer']">Um passo à frente</h2>
-            <p class="text-white text-base md:text-lg font-normal font-['Switzer'] leading-relaxed">Estamos sempre a inovar — o nosso Simulador de Espaço é apenas o início. Queremos dar-lhe total controlo criativo para que construa o ambiente perfeito, peça a peça.</p>
+        <div class="w-full p-5 flex flex-col gap-4 rounded-2xl bg-[#E5DCCA] text-white md:p-8">
+            <h2 class="text-[#3A4A5A] text-xl md:text-2xl font-bold font-['Switzer']">Um passo à frente</h2>
+            <p class="text-black text-base md:text-lg font-normal font-['Switzer'] leading-relaxed">Estamos sempre a inovar — o nosso Simulador de Espaço é apenas o início. Queremos dar-lhe total controlo criativo para que construa o ambiente perfeito, peça a peça.</p>
         </div>
 
         <!-- CTA Section -->

@@ -12,7 +12,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $user_id = $_SESSION['user_id'];
     $stmt = $pdo->prepare("
     SELECT ci.id, ci.quantity, m.name, m.image, v.color, v.width, v.height, v.depth,
-           IFNULL(v.price, m.price) AS price
+           CASE 
+               WHEN v.price IS NOT NULL AND v.price > 0 THEN v.price 
+               ELSE m.price 
+           END AS price
     FROM cart_items ci
     JOIN cart c ON ci.cart_id = c.id
     JOIN modules m ON ci.module_id = m.id
@@ -90,7 +93,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         // Get cart items
         $stmt = $pdo->prepare("
-            SELECT ci.id, ci.quantity, ci.module_id, ci.variant_id, v.stock, IFNULL(v.price, m.price) AS price
+            SELECT ci.id, ci.quantity, ci.module_id, ci.variant_id, v.stock, 
+                   CASE 
+                       WHEN v.price IS NOT NULL AND v.price > 0 THEN v.price 
+                       ELSE m.price 
+                   END AS price
             FROM cart_items ci
             JOIN cart c ON ci.cart_id = c.id
             JOIN modules m ON ci.module_id = m.id

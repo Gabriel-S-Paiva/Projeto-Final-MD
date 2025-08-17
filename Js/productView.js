@@ -29,8 +29,8 @@ fetch(`/Projeto-Final-MD/api/modules.php?id=${productId}`)
     document.getElementById('product-header').textContent = product.name;
     document.getElementById('product-name').textContent = product.name;
     document.getElementById('product-description').textContent = product.description;
-    document.querySelector('img.min-h-12').src = product.image;
-    document.querySelector('img.min-h-12').alt = product.name;
+    document.querySelector('#product-image').src = product.image;
+    document.querySelector('#product-image').alt = product.name;
 
     // Price (default: module price)
     document.getElementById('price').textContent = `€${Number(product.price).toFixed(2)}`;
