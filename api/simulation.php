@@ -2,6 +2,52 @@
 session_start();
 require_once '../includes/connect.php';
 
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    if (!isset($_SESSION['user_id'])) {
+        http_response_code(401);
+        echo json_encode(['error' => 'Not logged in']);
+        exit;
+    }
+    
+    $user_id = $_SESSION['user_id'];
+    
+    // Load specific simulation
+    if (isset($_GET['id'])) {
+        $simulation_id = intval($_GET['id']);
+        
+        // Get simulation details
+        $stmt = $pdo->prepare("SELECT * FROM simulations WHERE id = ? AND user_id = ?");
+        $stmt->execute([$simulation_id, $user_id]);
+        $simulation = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if (!$simulation) {
+            http_response_code(404);
+            echo json_encode(['error' => 'Simulation not found']);
+            exit;
+        }
+        
+        // Get simulation items with module details
+        $stmt = $pdo->prepare("
+            SELECT si.*, m.name, m.image, m.color, m.width as module_width, m.height as module_height, m.price
+            FROM simulation_items si
+            JOIN modules m ON si.module_id = m.id
+            WHERE si.simulation_id = ?
+        ");
+        $stmt->execute([$simulation_id]);
+        $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        $simulation['items'] = $items;
+        echo json_encode($simulation);
+        exit;
+    }
+    
+    // List all simulations for user
+    $stmt = $pdo->prepare("SELECT * FROM simulations WHERE user_id = ? ORDER BY created_at DESC");
+    $stmt->execute([$user_id]);
+    echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+    exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_SESSION['user_id'])) {
         http_response_code(401);
@@ -41,16 +87,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!empty($data['modules']) && is_array($data['modules'])) {
         $itemStmt = $pdo->prepare("INSERT INTO simulation_items (simulation_id, module_id, x, y, w, h, rotation, scale) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
         foreach ($data['modules'] as $mod) {
-            $itemStmt->execute([
-                $simulation_id,
-                intval($mod['module']['id']),
-                intval($mod['x']),
-                intval($mod['y']),
-                intval($mod['w']),
-                intval($mod['h']),
-                floatval($mod['rotation']),
-                floatval($mod['scale'])
-            ]);
+            $module_id = isset($mod['module_id']) ? intval($mod['module_id']) : (isset($mod['module']['id']) ? intval($mod['module']['id']) : null);
+            if ($module_id) {
+                $itemStmt->execute([
+                    $simulation_id,
+                    $module_id,
+                    intval($mod['x']),
+                    intval($mod['y']),
+                    intval($mod['w']),
+                    intval($mod['h']),
+                    floatval($mod['rotation']),
+                    floatval($mod['scale'])
+                ]);
+            }
         }
     }
 
