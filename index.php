@@ -19,7 +19,7 @@
     <h1 class="hidden">Komodu</h1>
     <main class="w-full flex flex-col items-center gap-5 px-4 py-2 md:px-20 md:py-10">
         <div class="w-full p-5 inline-flex flex-col justify-start items-start gap-2.5 overflow-hidden rounded-2xl bg-[#E5DCCA]">
-            <img class="w-full rounded-xl" src="./Assets/Imgs/hero_mobile.png">
+            <img class="w-full rounded-xl" src="Assets/Imgs/hero_mobile.png">
             <h2 class="justify-start text-[#3A4A5A] font-bold text-4xl font-['Unispace']">Tudo se encaixa</h2>
             <p class="font-['Switzer'] color-black text-base font-['Switzer']">Soluções modulares que se adaptam ao seu espaço, ao seu ritmo e à sua rotina. Uma nova forma de habitar com mais liberdade e menos excesso</p>
             <a href="./pages/catalog.php" class="w-full bg-[#3A4A5A] h-9 rounded overflow-hidden flex items-center justify-center text-[#E5DCCA] text-base font-bold font-['Switzer']">Ver Produtos</a>
@@ -39,7 +39,7 @@
             <h3 class="justify-start text-[#3A4A5A] text-xl font-bold font-['Switzer']">Planeie o seu espaço facilmente</h3>
             <p class="font-['Switzer'] color-black text-base">Use o nosso simulador para testar módulos no seu espaço. Ajuste, combine e visualize antes de comprar</p>
             <div class="w-full flex justify-center">
-                <img class="max-h-80" src="./Assets/Imgs/planer.png" />
+                <img class="max-h-80" src="Assets/Imgs/planer.png" />
             </div>
             <a href="./pages/simulator.php" class="w-full bg-[#3A4A5A] h-9 rounded overflow-hidden flex items-center justify-center text-[#E5DCCA] text-base font-bold font-['Switzer']">Começar a planear</a>
         </div>
@@ -62,7 +62,7 @@
         <div class="w-full p-5 inline-flex flex-col justify-start items-start gap-2.5 overflow-hidden rounded-2xl bg-[#E5DCCA]">
             <h3 class="justify-start text-[#3A4A5A] text-xl font-bold font-['Switzer']">Os nossos espaços</h3>
             <p class="font-['Switzer'] color-black text-base">Uma visão da Komudu sobre como o espaço urbano pode ser mais flexível, funcional e bonito. Estes ambientes representam a essência do nosso design modular.</p>
-            <img class="w-full" src="./Assets/Imgs/wheel1.png">
+            <img class="w-full" src="Assets/Imgs/wheel1.png">
             <p class="font-['Switzer'] color-black opacity-60 text-sm">“O espaço nao precisa de ser grande. Só precisa de fazer sentido”</p>
         </div>
     </main>

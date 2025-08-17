@@ -26,7 +26,7 @@
         </div>
         <!-- favorite icon on its left -->
         <div class="w-full p-5 inline-flex flex-col justify-start items-start gap-4 overflow-hidden rounded-2xl bg-[#E5DCCA]">
-            <img class="min-h-12">
+            <img class="min-h-12 w-full">
             <h3 id="product-name" class="self-stretch justify-start text-black text-xl font-bold font-['Switzer']"><!-- Product name -->1</h3>
             <p id="price" class="self-stretch justify-start text-black text-xl font-bold font-['Switzer']"><!-- Price -->1</p>
             <div class="inline-flex items-center gap-3 mb-2">

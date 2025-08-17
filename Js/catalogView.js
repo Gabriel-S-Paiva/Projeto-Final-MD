@@ -1,8 +1,10 @@
-fetch('/Projeto-Final-MD/api/modules.php')
-  .then(response => response.json())
-  .then(modules => {
-    modules.forEach(module => {
-      const card = document.createElement('div');
+let allModules = [];
+
+function renderModules(modules) {
+  const catalogList = document.getElementById('catalog-list');
+  catalogList.innerHTML = '';
+  modules.forEach(module => {
+    const card = document.createElement('div');
       card.className = 'relative w-full bg-white rounded shadow flex flex-col gap-3 p-4 mb-4';
 
       const tags = module.tags ? module.tags.split(',').map(tag => tag.trim()) : [];
@@ -53,7 +55,7 @@ fetch('/Projeto-Final-MD/api/modules.php')
           .then(res => res.json())
           .then(session => {
             if (!session.logged_in) {
-              window.location.href = `/pages/login.php?redirect=${encodeURIComponent(window.location.pathname)}`;
+              window.location.href = `pages/login.php`;
             } else {
               fetch('/Projeto-Final-MD/api/favorite.php', {
                 method: 'POST',
@@ -70,5 +72,73 @@ fetch('/Projeto-Final-MD/api/modules.php')
 
       card.appendChild(favIcon);
       document.getElementById('catalog-list').appendChild(card);
-    });
   });
+}
+
+fetch('/Projeto-Final-MD/api/modules.php')
+  .then(response => response.json())
+  .then(modules => {
+    allModules = modules;
+    renderModules(modules);
+  });
+
+document.getElementById('procurar').addEventListener('input', function(e) {
+  const query = e.target.value.toLowerCase();
+  const filtered = allModules.filter(module =>
+    module.name.toLowerCase().includes(query) ||
+    (module.tags && module.tags.toLowerCase().includes(query))
+  );
+  renderModules(filtered);
+});
+
+const filterModalBg = document.getElementById('filter-modal-bg');
+const filterModalBtn = document.getElementById('filter-modal');
+const closeFilterModalBtn = document.getElementById('close-filter-modal');
+const tagsList = document.getElementById('tags-list');
+const sortSelect = document.getElementById('sort-select');
+let selectedTags = [];
+
+filterModalBtn.onclick = () => {
+  // Populate tags from allModules
+  const tags = Array.from(new Set(
+    allModules.flatMap(m => (m.tags ? m.tags.split(',').map(t => t.trim()) : []))
+  ));
+  tagsList.innerHTML = tags.map(tag =>
+    `<label class="inline-flex items-center gap-1 bg-white rounded px-2 py-1 cursor-pointer">
+      <input type="checkbox" value="${tag}" class="tag-checkbox" />
+      <span class="text-xs font-['Switzer']">${tag}</span>
+    </label>`
+  ).join('');
+  filterModalBg.classList.remove('hidden');
+};
+
+closeFilterModalBtn.onclick = () => {
+  filterModalBg.classList.add('hidden');
+};
+
+filterModalBg.onclick = (e) => {
+  if (e.target === filterModalBg) filterModalBg.classList.add('hidden');
+};
+
+document.getElementById('filter-form').onsubmit = function(e) {
+  e.preventDefault();
+  // Get selected tags
+  selectedTags = Array.from(document.querySelectorAll('.tag-checkbox:checked')).map(cb => cb.value);
+  // Get sort option
+  const sortBy = sortSelect.value;
+
+  let filtered = allModules.filter(module => {
+    if (selectedTags.length === 0) return true;
+    const moduleTags = module.tags ? module.tags.split(',').map(t => t.trim()) : [];
+    return selectedTags.every(tag => moduleTags.includes(tag));
+  });
+
+  if (sortBy === 'size') {
+    filtered.sort((a, b) => (a.width * a.height * a.depth) - (b.width * b.height * b.depth));
+  } else if (sortBy === 'price') {
+    filtered.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+  }
+
+  renderModules(filtered);
+  filterModalBg.classList.add('hidden');
+};

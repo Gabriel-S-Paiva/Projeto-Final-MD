@@ -20,7 +20,7 @@
     <main class="w-full flex flex-col items-center gap-5 px-4 py-2 md:px-20 md:py-10">
         <div class="w-full p-5 inline-flex flex-col justify-start items-start gap-2.5 overflow-hidden rounded-2xl bg-[#E5DCCA]">
             <h2 class="justify-start text-[#3A4A5A] text-4xl font-bold font-['Unispace']">Sobre a Komodu</h2>
-            <img class="" href="./Assets/Imgs/about-bg.png">
+            <img class="w-full" src="Assets/Imgs/about-bg.png">
             <p class="justify-start text-black text-base font-normal font-['Switzer']">Na Komudu acreditamos que cada espaço é único e que o mobiliário deve adaptar-se a si — não o contrário. Criamos soluções modulares inteligentes, que crescem, transformam-se e se encaixam na sua vida.</p>
         </div>
         <hr class="bg-[#3A4A5A] md:hidden">

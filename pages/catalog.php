@@ -21,13 +21,13 @@
         <h2 class="justify-start text-[#3A4A5A] text-4xl font-bold font-['Unispace']">Conheça os nossos produtos</h2>
         <div class="w-full p-5 inline-flex flex-col justify-start items-start gap-2.5 overflow-hidden rounded-2xl bg-[#E5DCCA]">
             <form class="flex gap-2 w-full">
-                <input type="text" class="flex-1 bg-white rounded h-9 p-2 text-start font-bold font-['Switzer']" placeholder="Procurar">
+                <input id="procurar" type="text" class="flex-1 bg-white rounded h-9 p-2 text-start font-bold font-['Switzer']" placeholder="Procurar">
                 <button type="submit" class="w-16 bg-[#3A4A5A] h-9 rounded overflow-hidden flex items-center justify-center text-[#E5DCCA] text-base font-bold font-['Switzer']">
                     <span class="material-symbols-outlined" style="font-size: 1.75rem;">search</span>
                 </button>
             </form>
             <div class="inline-flex gap-4">
-                <button class="flex justify-center px-2 bg-white rounded inline-flex justify-start items-center gap-2 overflow-hidden text-center font-bold font-['Switzer']">
+                <button id="filter-modal" class="flex justify-center px-2 bg-white rounded inline-flex justify-start items-center gap-2 overflow-hidden text-center font-bold font-['Switzer']">
                     Filtros
                     <span class="material-symbols-outlined rotate-270" style="font-size: 1.75rem;">keyboard_arrow_down</span>
                 </button>
@@ -40,11 +40,36 @@
                 <!-- card content -->
             </div>
             <button class="self-stretch px-11 py-1 inline-flex justify-center items-center gap-1.5 overflow-hidden">
-                <p class="opacity-60 text-center justify-start text-black text-sm font-normal font-['Switzer']">Ver detalhes tecnicos</p>
+                <p class="opacity-60 text-center justify-start text-black text-sm font-normal font-['Switzer']">Ver mais</p>
                 <span class="material-symbols-outlined" style="font-size: 1.75rem;">keyboard_arrow_down</span>
             </button>
         </div> 
     </main>
+    <div id="filter-modal-bg" class="fixed inset-0 bg-black bg-opacity-40 z-50 hidden flex items-center justify-center">
+  <div class="bg-[#E5DCCA] rounded-2xl p-8 shadow-xl w-full max-w-md flex flex-col gap-4 items-center">
+    <h3 class="text-[#3A4A5A] text-xl font-bold mb-2">Filtros</h3>
+    <form id="filter-form" class="w-full flex flex-col gap-4">
+      <!-- Tags filter -->
+      <div>
+        <label class="block text-[#3A4A5A] font-bold mb-2">Tags</label>
+        <div id="tags-list" class="flex flex-wrap gap-2"></div>
+      </div>
+      <!-- Sort options -->
+      <div>
+        <label class="block text-[#3A4A5A] font-bold mb-2">Ordenar por</label>
+        <select id="sort-select" class="w-full p-2 rounded border border-[#A5B5C0]">
+          <option value="">Nenhum</option>
+          <option value="size">Tamanho</option>
+          <option value="price">Preço</option>
+        </select>
+      </div>
+      <div class="flex gap-3 w-full mt-4">
+        <button type="submit" class="flex-1 bg-[#3A4A5A] text-white font-bold rounded h-10">Aplicar</button>
+        <button type="button" id="close-filter-modal" class="flex-1 bg-[#E5DCCA] outline outline-1 outline-[#3A4A5A] text-[#3A4A5A] font-bold rounded h-10">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
     <?php include '../includes/footer.php'; ?>
     <script src="Js\catalogView.js"></script>
 </body>
