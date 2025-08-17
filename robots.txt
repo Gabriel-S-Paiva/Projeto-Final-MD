@@ -1,0 +1,27 @@
+User-agent: *
+Allow: /
+
+# Allow access to main pages
+Allow: /index.php
+Allow: /pages/about.php
+Allow: /pages/catalog.php
+Allow: /pages/product.php
+Allow: /pages/simulator.php
+Allow: /pages/login.php
+
+# Block admin areas
+Disallow: /pages/admin.php
+Disallow: /pages/profile.php
+Disallow: /pages/cart.php
+Disallow: /api/
+Disallow: /includes/
+
+# Allow assets
+Allow: /Assets/
+Allow: /Js/
+
+# Sitemap location
+Sitemap: https://komudu.com/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1

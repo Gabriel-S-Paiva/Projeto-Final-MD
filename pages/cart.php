@@ -1,9 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Komodu - Carrinho</title>
+    <title>Carrinho de Compras | Komudu - Móveis Modulares</title>
+    <meta name="description" content="Revise seus itens selecionados no carrinho Komudu. Ajuste quantidades e finalize sua compra de móveis modulares com segurança.">
+    <meta name="keywords" content="carrinho compras, checkout, móveis modulares, finalizar compra, komudu">
+    <meta name="robots" content="noindex, follow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="Assets/Imgs/icon.svg">
+    
     <base href="/Projeto-Final-MD/">
     <!-- Definição de fontes -->
     <link rel="stylesheet" href="./Assets/Styles/fonts.css">
@@ -16,7 +23,9 @@
 </head>
 <body class="flex flex-col gap-5">
     <?php include '../includes/navbar.php'; ?>
-    <h1 class="hidden">Komodu - Carrinho</h1>
+    <header class="hidden">
+        <h1>Carrinho de Compras Komudu</h1>
+    </header>
     <main class="w-full flex flex-col items-center gap-6 px-4 py-2 md:px-8 lg:px-12 xl:px-20 md:py-10 max-w-7xl mx-auto">
         <div class="w-full">
             <h2 class="text-[#3A4A5A] text-3xl md:text-4xl font-bold font-['Unispace']">Carrinho</h2>

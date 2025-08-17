@@ -1,9 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Komodu - Produto</title>
+    <title id="page-title">Produto | Komudu - Móveis Modulares</title>
+    <meta name="description" id="page-description" content="Descubra este produto modular Komudu. Veja detalhes, variantes de cor e tamanho. Adicione ao carrinho ou simule no seu espaço.">
+    <meta name="keywords" content="produto modular, móvel funcional, variantes, cores, tamanhos, komudu">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="product">
+    <meta property="og:title" id="og-title" content="Produto | Komudu">
+    <meta property="og:description" id="og-description" content="Produto modular Komudu">
+    <meta property="og:image" id="og-image" content="">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" id="canonical-url" href="https://komudu.com/pages/product.php">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="Assets/Imgs/icon.svg">
+    
     <base href="/Projeto-Final-MD/">
     <!-- Definição de fontes -->
     <link rel="stylesheet" href="./Assets/Styles/fonts.css">
@@ -13,10 +29,33 @@
     <script src="./Assets/Styles/config.js"></script>
     <!-- Tailwind CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <!-- Structured Data (will be populated by JavaScript) -->
+    <script type="application/ld+json" id="product-structured-data">
+    {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "",
+        "description": "",
+        "image": "",
+        "brand": {
+            "@type": "Brand",
+            "name": "Komudu"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": "",
+            "priceCurrency": "EUR",
+            "availability": "https://schema.org/InStock"
+        }
+    }
+    </script>
 </head>
 <body class="flex flex-col gap-5">
     <?php include '../includes/navbar.php'; ?>
-    <h1 class="hidden">Komodu - Produto</h1>
+    <header class="hidden">
+        <h1 id="main-title">Produto Komudu</h1>
+    </header>
     <main class="w-full flex flex-col items-center gap-6 px-4 py-2 md:px-8 lg:px-12 xl:px-20 md:py-10 max-w-7xl mx-auto">
         <!-- Header with favorite -->
         <div class="flex items-center justify-between w-full">
@@ -31,7 +70,7 @@
             <!-- Product Image -->
             <div class="w-full">
                 <div class="aspect-square overflow-hidden rounded-2xl bg-[#E5DCCA] p-4">
-                    <img id="product-image" class="w-full h-full object-cover rounded-xl">
+                    <img id="product-image" class="w-full h-full object-cover rounded-xl" alt="Imagem do produto modular">
                 </div>
             </div>
             

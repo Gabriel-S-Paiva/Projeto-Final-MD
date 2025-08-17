@@ -1,9 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Komodu - Simulador</title>
+    <title>Simulador de Espaços 3D | Komudu - Planear Móveis Modulares</title>
+    <meta name="description" content="Use nosso simulador 3D para planear seu espaço com móveis modulares Komudu. Arraste, posicione e visualize antes de comprar. Melhor experiência em desktop.">
+    <meta name="keywords" content="simulador 3D, planeador espaços, móveis modulares, canvas interativo, design interiores, komudu">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Simulador de Espaços 3D | Komudu">
+    <meta property="og:description" content="Planee seu espaço com móveis modulares usando nosso simulador interativo">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://komudu.com/pages/simulator.php">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="Assets/Imgs/icon.svg">
+    
     <base href="/Projeto-Final-MD/">
     <!-- Definição de fontes -->
     <link rel="stylesheet" href="./Assets/Styles/fonts.css">
@@ -13,10 +28,29 @@
     <script src="./Assets/Styles/config.js"></script>
     <!-- Tailwind CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Simulador de Espaços Komudu",
+        "description": "Ferramenta interativa para planeamento de espaços com móveis modulares",
+        "applicationCategory": "DesignApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "EUR"
+        }
+    }
+    </script>
 </head>
 <body class="flex flex-col gap-5">
     <?php include '../includes/navbar.php'; ?>
-    <h1 class="hidden">Komodu - Simulador</h1>
+    <header class="hidden">
+        <h1>Simulador de Espaços Komudu - Planear Móveis Modulares</h1>
+    </header>
     <main class="w-full flex flex-col items-center gap-6 px-4 py-2 md:px-8 lg:px-12 xl:px-20 md:py-10 max-w-7xl mx-auto">
         <div class="w-full">
             <h2 class="text-[#3A4A5A] text-3xl md:text-4xl font-bold font-['Unispace'] mb-2">Simulador de Espaços</h2>

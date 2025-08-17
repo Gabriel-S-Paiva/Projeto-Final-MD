@@ -1,9 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Komodu - Produto</title>
+    <title>Login e Registo | Komudu - Área do Cliente</title>
+    <meta name="description" content="Aceda à sua conta Komudu ou crie uma nova. Gerir favoritos, simulações e compras de móveis modulares.">
+    <meta name="keywords" content="login komudu, registo, área cliente, conta pessoal, móveis modulares">
+    <meta name="robots" content="noindex, follow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="Assets/Imgs/icon.svg">
+    
     <base href="/Projeto-Final-MD/">
     <!-- Definição de fontes -->
     <link rel="stylesheet" href="./Assets/Styles/fonts.css">
@@ -16,7 +23,9 @@
 </head>
 <body class="flex flex-col gap-5">
     <?php include '../includes/navbar.php'; ?>
-    <h1 class="hidden">Komodu - Produto</h1>
+    <header class="hidden">
+        <h1>Login e Registo - Área do Cliente Komudu</h1>
+    </header>
     <main class="w-full flex flex-col items-center gap-5 px-4 py-2 md:px-20 md:py-10">
         <!-- Register Form -->
         <form id="register-form" class="w-full max-w-md mx-auto bg-white rounded-2xl shadow-lg p-8 flex flex-col gap-6">

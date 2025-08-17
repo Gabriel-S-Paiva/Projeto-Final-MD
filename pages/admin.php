@@ -1,9 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Komodu - Admin</title>
+    <title>Painel Administrativo | Komudu - Gestão</title>
+    <meta name="description" content="Painel administrativo Komudu. Gestão de produtos, utilizadores e histórico de entregas. Acesso restrito a administradores.">
+    <meta name="keywords" content="admin komudu, painel administrativo, gestão produtos, gestão utilizadores">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="Assets/Imgs/icon.svg">
+    
     <base href="/Projeto-Final-MD/">
     <!-- Definição de fontes -->
     <link rel="stylesheet" href="./Assets/Styles/fonts.css">
@@ -16,6 +23,9 @@
 </head>
 <body class="min-h-screen font-['Switzer']">
   <?php include('../includes/navbar.php'); ?>
+  <header class="hidden">
+    <h1>Painel Administrativo Komudu</h1>
+  </header>
   <main class="bg-[#E5DCCA] max-w-7xl rounded-xl mx-auto p-6 m-20">
     <h1 class="text-3xl font-bold text-[#3A4A5A] mb-6">Admin Dashboard</h1>
     <section id="delivery-history" class="mb-10">

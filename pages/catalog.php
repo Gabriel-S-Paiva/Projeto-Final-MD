@@ -1,9 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Komodu - Catalogo</title>
+    <title>Catálogo de Móveis Modulares | Komudu - Design Inteligente</title>
+    <meta name="description" content="Explore nosso catálogo completo de móveis modulares. Estantes, sofás, mesas, cadeiras e mais. Filtros avançados para encontrar a solução perfeita para seu espaço.">
+    <meta name="keywords" content="catálogo móveis, móveis modulares, estantes modulares, sofás modulares, filtros produtos, loja online">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Catálogo de Móveis Modulares | Komudu">
+    <meta property="og:description" content="Conheça nossos produtos modulares. Soluções inteligentes que se adaptam ao seu espaço e estilo de vida.">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://komudu.com/pages/catalog.php">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="Assets/Imgs/icon.svg">
+    
     <base href="/Projeto-Final-MD/">
     <!-- Definição de fontes -->
     <link rel="stylesheet" href="./Assets/Styles/fonts.css">
@@ -13,10 +28,23 @@
     <script src="./Assets/Styles/config.js"></script>
     <!-- Tailwind CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Catálogo de Móveis Modulares",
+        "description": "Catálogo completo de móveis modulares Komudu com filtros avançados",
+        "url": "https://komudu.com/pages/catalog.php"
+    }
+    </script>
 </head>
 <body class="flex flex-col gap-5">
     <?php include '../includes/navbar.php'; ?>
-    <h1 class="hidden">Komudo - Catalogo</h1>
+    <header class="hidden">
+        <h1>Catálogo de Móveis Modulares Komudu</h1>
+    </header>
     <main class="w-full flex flex-col items-center gap-6 px-4 py-2 md:px-8 lg:px-12 xl:px-20 md:py-10 max-w-7xl mx-auto">
         <div class="w-full">
             <h2 class="text-[#3A4A5A] text-3xl md:text-4xl font-bold font-['Unispace'] mb-6">Conheça os nossos produtos</h2>

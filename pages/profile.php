@@ -1,9 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Komodu - Perfil</title>
+    <title>Perfil do Utilizador | Komudu - Área Pessoal</title>
+    <meta name="description" content="Gerir seu perfil Komudu. Ver projetos salvos, favoritos e dados pessoais. Acesso aos seus móveis modulares e simulações.">
+    <meta name="keywords" content="perfil utilizador, área pessoal, projetos salvos, favoritos, dados pessoais, komudu">
+    <meta name="robots" content="noindex, follow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="Assets/Imgs/icon.svg">
+    
     <base href="/Projeto-Final-MD/">
     <!-- Definição de fontes -->
     <link rel="stylesheet" href="./Assets/Styles/fonts.css">
@@ -16,8 +23,10 @@
 </head>
 <body class="flex flex-col gap-5">
     <?php include '../includes/navbar.php'; ?>
-    <h1 class="hidden">Komodu - Perfil</h1>
-    <h2 class="hidden">O meu perfil</h2>
+    <header class="hidden">
+        <h1>Perfil do Utilizador Komudu</h1>
+        <h2>O meu perfil</h2>
+    </header>
     <main class="w-full flex flex-col items-center gap-5 px-4 py-2 md:px-20 md:py-10">
         <span id="initials" class="w-24 h-24 rounded-full bg-[#3A4A5A] font-bold text-4xl font-['Unispace'] text-white flex items-center justify-center"><!-- First and Last(if aplicable) Letter --></span>
         <p id="username" class="justify-start text-[#3A4A5A] text-xl font-bold font-['Switzer']"><!-- Username --></p>

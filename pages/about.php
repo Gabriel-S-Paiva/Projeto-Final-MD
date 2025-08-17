@@ -1,9 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Komodu - Sobre</title>
+    <title>Sobre a Komudu - Nossa História e Valores | Móveis Modulares</title>
+    <meta name="description" content="Conheça a história da Komudu. Criamos móveis modulares inteligentes, sustentáveis e funcionais que se adaptam à sua vida. Design intemporal e soluções práticas.">
+    <meta name="keywords" content="sobre komudu, história, valores, sustentabilidade, design modular, móveis inteligentes">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Sobre a Komudu - Nossa História e Valores">
+    <meta property="og:description" content="Na Komudu acreditamos que cada espaço é único. Criamos soluções modulares inteligentes que crescem e se transformam com você.">
+    <meta property="og:image" content="../Assets/Imgs/about-bg.png">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://komudu.com/pages/about.php">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="Assets/Imgs/icon.svg">
+    
     <base href="/Projeto-Final-MD/">
     <!-- Definição de fontes -->
     <link rel="stylesheet" href="./Assets/Styles/fonts.css">
@@ -13,11 +29,29 @@
     <script src="./Assets/Styles/config.js"></script>
     <!-- Tailwind CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "mainEntity": {
+            "@type": "Organization",
+            "name": "Komudu",
+            "description": "Empresa especializada em móveis modulares inteligentes",
+            "foundingDate": "2025",
+            "mission": "Simplificar a vida urbana através de soluções modulares funcionais e sustentáveis"
+        }
+    }
+    </script>
 </head>
 <body class="flex flex-col gap-5">
     <?php include '../includes/navbar.php'; ?>
-    <h1 class="hidden">Komudo - Sobre</h1>
+    <header class="hidden">
+        <h1>Sobre a Komudu - Nossa História e Valores</h1>
+    </header>
     <main class="w-full flex flex-col items-center gap-6 px-4 py-2 md:px-8 lg:px-12 xl:px-20 md:py-10 max-w-7xl mx-auto">
+        
         <!-- Hero Section -->
         <div class="w-full p-5 flex flex-col gap-4 rounded-2xl bg-[#E5DCCA] md:p-8">
             <h2 class="text-[#3A4A5A] text-2xl md:text-4xl font-bold font-['Unispace']">Sobre a Komodu</h2>
@@ -28,37 +62,37 @@
         </div>
 
         <!-- Content Grid -->
-        <div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <section class="w-full grid grid-cols-1 lg:grid-cols-2 gap-6">
             <!-- O que fazemos -->
-            <div class="w-full p-5 flex flex-col gap-4 rounded-2xl bg-[#E5DCCA] md:p-8">
-                <h2 class="text-[#3A4A5A] text-xl md:text-2xl font-bold font-['Switzer']">O que fazemos</h2>
-                <h3 class="text-black text-base md:text-lg font-bold font-['Switzer']">Design inteligente, modular e duradouro.</h3>
+            <article class="w-full p-5 flex flex-col gap-4 rounded-2xl bg-[#E5DCCA] md:p-8">
+                <h3 class="text-[#3A4A5A] text-xl md:text-2xl font-bold font-['Switzer']">O que fazemos</h3>
+                <h4 class="text-black text-base md:text-lg font-bold font-['Switzer']">Design inteligente, modular e duradouro.</h4>
                 <p class="text-black text-base md:text-lg font-normal font-['Switzer'] leading-relaxed">Cada peça Komudu é pensada para se integrar perfeitamente, combinando funcionalidade e estética minimalista. Modularidade significa que pode reorganizar, ampliar ou reduzir os seus móveis, acompanhando as mudanças no seu dia a dia.</p>
-            </div>
+            </article>
 
             <!-- Os nossos valores -->
-            <div class="w-full p-5 flex flex-col gap-4 rounded-2xl bg-[#E5DCCA] md:p-8">
-                <h2 class="text-[#3A4A5A] text-xl md:text-2xl font-bold font-['Switzer']">Os nossos valores</h2>
-                <div class="flex flex-col gap-3">
+            <article class="w-full p-5 flex flex-col gap-4 rounded-2xl bg-[#E5DCCA] md:p-8">
+                <h3 class="text-[#3A4A5A] text-xl md:text-2xl font-bold font-['Switzer']">Os nossos valores</h3>
+                <dl class="flex flex-col gap-3">
                     <div>
-                        <span class="text-black text-base md:text-lg font-bold font-['Switzer']">Modularidade: </span>
-                        <span class="text-black text-base md:text-lg font-normal font-['Switzer']">Móveis que se adaptam à sua vida.</span>
+                        <dt class="text-black text-base md:text-lg font-bold font-['Switzer'] inline">Modularidade: </dt>
+                        <dd class="text-black text-base md:text-lg font-normal font-['Switzer'] inline">Móveis que se adaptam à sua vida.</dd>
                     </div>
                     <div>
-                        <span class="text-black text-base md:text-lg font-bold font-['Switzer']">Sustentabilidade: </span>
-                        <span class="text-black text-base md:text-lg font-normal font-['Switzer']">Menos desperdício, mais durabilidade.</span>
+                        <dt class="text-black text-base md:text-lg font-bold font-['Switzer'] inline">Sustentabilidade: </dt>
+                        <dd class="text-black text-base md:text-lg font-normal font-['Switzer'] inline">Menos desperdício, mais durabilidade.</dd>
                     </div>
                     <div>
-                        <span class="text-black text-base md:text-lg font-bold font-['Switzer']">Design intemporal: </span>
-                        <span class="text-black text-base md:text-lg font-normal font-['Switzer']">Estética minimalista que resiste às modas.</span>
+                        <dt class="text-black text-base md:text-lg font-bold font-['Switzer'] inline">Design intemporal: </dt>
+                        <dd class="text-black text-base md:text-lg font-normal font-['Switzer'] inline">Estética minimalista que resiste às modas.</dd>
                     </div>
                     <div>
-                        <span class="text-black text-base md:text-lg font-bold font-['Switzer']">Funcionalidade: </span>
-                        <span class="text-black text-base md:text-lg font-normal font-['Switzer']">Soluções práticas e versáteis.</span>
+                        <dt class="text-black text-base md:text-lg font-bold font-['Switzer'] inline">Funcionalidade: </dt>
+                        <dd class="text-black text-base md:text-lg font-normal font-['Switzer'] inline">Soluções práticas e versáteis.</dd>
                     </div>
-                </div>
-            </div>
-        </div>
+                </dl>
+            </article>
+        </section>
 
         <!-- Innovation Section -->
         <div class="w-full p-5 flex flex-col gap-4 rounded-2xl bg-[#E5DCCA] text-white md:p-8">
