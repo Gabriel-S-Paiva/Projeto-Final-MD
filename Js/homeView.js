@@ -1,33 +1,43 @@
 fetch('/Projeto-Final-MD/api/modules.php')
   .then(response => response.json())
   .then(modules => {
+    const container = document.getElementById('home-modules');
+    container.className = 'w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6';
+    
     modules.slice(0, 6).forEach(module => {
       const card = document.createElement('div');
-      card.className =
-        'relative min-w-[80vw] sm:min-w-0 sm:w-full bg-white rounded-2xl shadow-lg p-6 flex flex-col gap-4'; // wider cards on mobile, full width in grid
+      card.className = 'relative bg-white rounded-2xl shadow-lg p-6 flex flex-col gap-4 hover:shadow-xl transition-shadow cursor-pointer';
+      
       const tags = module.tags ? module.tags.split(',').map(tag => tag.trim()) : [];
       const tagsHtml = tags.map(tag =>
         `<span class="inline-block bg-[#E5DCCA] text-black font-['Switzer'] text-xs rounded-full px-3 py-1 mr-2 mb-2">${tag}</span>`
       ).join('');
 
       card.innerHTML = `
-        <img src="${module.image}" alt="${module.name}" class="w-full h-40 object-cover mb-2 rounded">
-        <div>
-          <h3 class="justify-start text-black text-xl font-bold font-['Switzer']">${module.name}</h3>
-          <p class="font-['switzer'] text-base opacity-60 mb-2">${module.depth}x${module.width}x${module.height}</p>
-          <p class="font-['switzer'] text-base hidden md:inline mb-2">${module.description}</p>
+        <div class="aspect-square overflow-hidden rounded-xl mb-2">
+          <img src="${module.image}" alt="${module.name}" class="w-full h-full object-cover">
         </div>
-        <div class="flex flex-wrap gap-2">
+        <div class="flex-1">
+          <h3 class="text-black text-lg md:text-xl font-bold font-['Switzer'] mb-2">${module.name}</h3>
+          <p class="font-['Switzer'] text-sm text-gray-600 mb-2">${module.depth}x${module.width}x${module.height}</p>
+          <p class="font-['Switzer'] text-sm text-gray-700 line-clamp-2 mb-3">${module.description}</p>
+        </div>
+        <div class="flex flex-wrap gap-2 mb-4">
           ${tagsHtml}
         </div>
-        <a href="./pages/simulator.php" class="w-full bg-[#3A4A5A] h-9 rounded overflow-hidden flex items-center justify-center text-base text-white font-bold font-['Switzer']">Simular no espaço</a>
+        <a href="./pages/simulator.php" class="w-full bg-[#3A4A5A] h-10 rounded-lg overflow-hidden flex items-center justify-center text-base text-white font-bold font-['Switzer'] hover:bg-[#2E2E2E] transition-colors">
+          Simular no espaço
+        </a>
       `;
-      card.addEventListener('click', () => {
-        window.location.href = `./pages/product.php?id=${module.id}`;
+      
+      card.addEventListener('click', (e) => {
+        if (e.target.tagName !== 'A' && e.target.tagName !== 'SPAN') {
+          window.location.href = `./pages/product.php?id=${module.id}`;
+        }
       });
 
-            const favIcon = document.createElement('span');
-      favIcon.className = 'absolute top-3 right-3 cursor-pointer material-symbols-outlined text-2xl transition-colors';
+      const favIcon = document.createElement('span');
+      favIcon.className = 'absolute top-4 right-4 cursor-pointer material-symbols-outlined text-2xl transition-all hover:scale-110 z-10';
       favIcon.textContent = 'favorite';
       favIcon.style.color = '#A5B5C0';
 
@@ -66,6 +76,6 @@ fetch('/Projeto-Final-MD/api/modules.php')
       };
 
       card.appendChild(favIcon);
-      document.getElementById('home-modules').appendChild(card);
+      container.appendChild(card);
     });
   });

@@ -17,30 +17,36 @@
 <body class="flex flex-col gap-5">
     <?php include '../includes/navbar.php'; ?>
     <h1 class="hidden">Komudo - Catalogo</h1>
-    <main class="w-full flex flex-col items-start gap-5 px-4 py-2 md:px-20 md:py-10">
-        <h2 class="justify-start text-[#3A4A5A] text-4xl font-bold font-['Unispace']">Conheça os nossos produtos</h2>
-        <div class="w-full p-5 inline-flex flex-col justify-start items-start gap-2.5 overflow-hidden rounded-2xl bg-[#E5DCCA]">
-            <form class="flex gap-2 w-full">
-                <input id="procurar" type="text" class="flex-1 bg-white rounded h-9 p-2 text-start font-bold font-['Switzer']" placeholder="Procurar">
-                <button type="submit" class="w-16 bg-[#3A4A5A] h-9 rounded overflow-hidden flex items-center justify-center text-[#E5DCCA] text-base font-bold font-['Switzer']">
+    <main class="w-full flex flex-col items-center gap-6 px-4 py-2 md:px-8 lg:px-12 xl:px-20 md:py-10 max-w-7xl mx-auto">
+        <div class="w-full">
+            <h2 class="text-[#3A4A5A] text-3xl md:text-4xl font-bold font-['Unispace'] mb-6">Conheça os nossos produtos</h2>
+        </div>
+        
+        <!-- Search and Filter Section -->
+        <div class="w-full p-5 flex flex-col gap-4 rounded-2xl bg-[#E5DCCA] md:p-8">
+            <form class="flex flex-col sm:flex-row gap-3 w-full">
+                <input id="procurar" type="text" class="flex-1 bg-white rounded h-10 px-4 text-start font-bold font-['Switzer'] placeholder-gray-500" placeholder="Procurar">
+                <button type="submit" class="w-full sm:w-16 bg-[#3A4A5A] h-10 rounded overflow-hidden flex items-center justify-center text-[#E5DCCA] text-base font-bold font-['Switzer'] hover:bg-[#2E2E2E] transition-colors">
                     <span class="material-symbols-outlined" style="font-size: 1.75rem;">search</span>
                 </button>
             </form>
-            <div class="inline-flex gap-4">
-                <button id="filter-modal" class="flex justify-center px-2 bg-white rounded inline-flex justify-start items-center gap-2 overflow-hidden text-center font-bold font-['Switzer']">
+            <div class="flex flex-col sm:flex-row gap-3">
+                <button id="filter-modal" class="flex justify-center items-center px-4 py-2 bg-white rounded gap-2 overflow-hidden text-center font-bold font-['Switzer'] hover:bg-gray-50 transition-colors">
                     Filtros
                     <span class="material-symbols-outlined rotate-270" style="font-size: 1.75rem;">keyboard_arrow_down</span>
                 </button>
-                <button class="w-16 bg-[#3A4A5A] h-9 rounded overflow-hidden flex items-center justify-center text-[#E5DCCA] text-base font-bold font-['Switzer']">Aplicar</button>
+                <button class="w-full sm:w-auto px-6 bg-[#3A4A5A] h-10 rounded overflow-hidden flex items-center justify-center text-[#E5DCCA] text-base font-bold font-['Switzer'] hover:bg-[#2E2E2E] transition-colors">Aplicar</button>
             </div>
         </div>
-        <div class="w-full p-5 inline-flex flex-col justify-start items-start gap-2.5 overflow-hidden rounded-2xl bg-[#E5DCCA]">
-            <h3 class="justify-start text-[#3A4A5A] text-xl font-bold font-['Switzer']">Modulos em destaque</h3>
+        
+        <!-- Products Grid -->
+        <div class="w-full p-5 flex flex-col gap-6 rounded-2xl bg-[#E5DCCA] md:p-8">
+            <h3 class="text-[#3A4A5A] text-xl md:text-2xl font-bold font-['Switzer']">Módulos em destaque</h3>
             <div id="catalog-list" class="w-full">
                 <!-- card content -->
             </div>
-            <button class="self-stretch px-11 py-1 inline-flex justify-center items-center gap-1.5 overflow-hidden">
-                <p class="opacity-60 text-center justify-start text-black text-sm font-normal font-['Switzer']">Ver mais</p>
+            <button class="self-center px-8 py-3 flex justify-center items-center gap-2 overflow-hidden rounded-lg bg-white hover:bg-gray-50 transition-colors">
+                <p class="text-center text-black text-sm font-normal font-['Switzer']">Ver mais</p>
                 <span class="material-symbols-outlined" style="font-size: 1.75rem;">keyboard_arrow_down</span>
             </button>
         </div> 

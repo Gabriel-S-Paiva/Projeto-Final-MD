@@ -17,25 +17,45 @@
 <body class="flex flex-col gap-5">
     <?php include '../includes/navbar.php'; ?>
     <h1 class="hidden">Komodu - Carrinho</h1>
-    <main class="w-full flex flex-col items-start gap-5 px-4 py-2 md:px-20 md:py-10">
-        <h2 class="text-[#3A4A5A] text-4xl font-bold font-['Unispace']">Carrinho</h2>
-        <div id="load-cart" class="w-full">
-
+    <main class="w-full flex flex-col items-center gap-6 px-4 py-2 md:px-8 lg:px-12 xl:px-20 md:py-10 max-w-7xl mx-auto">
+        <div class="w-full">
+            <h2 class="text-[#3A4A5A] text-3xl md:text-4xl font-bold font-['Unispace']">Carrinho</h2>
         </div>
-        <hr>
-        <div class="self-stretch inline-flex justify-between items-start">
-            <p class="justify-start text-black text-base font-normal font-['Switzer']">Subtotal</p>
-            <span class="justify-start text-black text-base font-bold font-['Switzer']"><!-- sum of products price*quantity of each --></span>
+        
+        <!-- Cart Content -->
+        <div class="w-full grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Cart Items -->
+            <div class="lg:col-span-2">
+                <div id="load-cart" class="w-full">
+                    <!-- Cart items will be loaded here -->
+                </div>
+            </div>
+            
+            <!-- Order Summary -->
+            <div class="w-full p-6 flex flex-col gap-6 rounded-2xl bg-[#E5DCCA] md:p-8 h-fit">
+                <h3 class="text-[#3A4A5A] text-xl md:text-2xl font-bold font-['Switzer']">Resumo do pedido</h3>
+                
+                <div class="flex flex-col gap-4">
+                    <div class="flex justify-between items-center">
+                        <p class="text-black text-base font-normal font-['Switzer']">Subtotal</p>
+                        <span id="subtotal" class="text-black text-base font-bold font-['Switzer']"><!-- sum of products price*quantity --></span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <p class="text-black text-base font-normal font-['Switzer']">Envio</p>
+                        <span class="text-black text-base font-bold font-['Switzer']">50€</span>
+                    </div>
+                    <hr class="border-[#3A4A5A]">
+                    <div class="flex justify-between items-center">
+                        <p class="text-black text-lg font-bold font-['Switzer']">Total</p>
+                        <span id="total" class="text-black text-lg font-bold font-['Switzer']"><!-- Subtotal + Envio --></span>
+                    </div>
+                </div>
+                
+                <button id="buy-cart" class="w-full bg-[#3A4A5A] h-12 rounded-lg overflow-hidden flex items-center justify-center text-[#E5DCCA] text-base font-bold font-['Switzer'] hover:bg-[#2E2E2E] transition-colors">
+                    Finalizar compra
+                </button>
+            </div>
         </div>
-        <div class="self-stretch inline-flex justify-between items-start">
-            <p class="justify-start text-black text-base font-normal font-['Switzer']">Envio</p>
-            <span class="justify-start text-black text-base font-bold font-['Switzer']">50€</span>
-        </div>
-        <div class="self-stretch inline-flex justify-between items-start">
-            <p class="justify-start text-black text-base font-normal font-['Switzer']">Total</p>
-            <span class="justify-start text-black text-base font-bold font-['Switzer']"><!-- Subtotal + Envio --></span>
-        </div>
-        <button id="buy-cart" class="w-full bg-[#3A4A5A] h-9 rounded overflow-hidden flex items-center justify-center text-[#E5DCCA] text-base font-bold font-['Switzer']">Finalizar compra</button>
     </main>
     <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-[#3A4A5A] text-white font-['Switzer'] px-6 py-3 rounded-lg shadow-lg opacity-0 pointer-events-none transition-all duration-300 z-[9999]"></div>
     <?php include '../includes/footer.php'; ?>
