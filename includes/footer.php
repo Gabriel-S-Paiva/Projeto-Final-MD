@@ -10,7 +10,7 @@
         <a href="#"><img src="./Assets/Imgs/facebook.svg" alt="Facebook" class="w-8 h-8" /></a>
         <a href="#"><img src="./Assets/Imgs/insta.svg" alt="Instagram" class="w-8 h-8" /></a>
         <a href="#"><img src="./Assets/Imgs/x.svg" alt="X" class="w-8 h-8" /></a>
-        <a href="#"><img src="./Assets/Imgs/github.svg" alt="GitHub" class="w-8 h-8" /></a>
+        <a href="https://github.com/Gabriel-S-Paiva"><img src="./Assets/Imgs/github.svg" alt="GitHub" class="w-8 h-8" /></a>
     </div>
     <div class="w-full h-4 gap-2.5 flex">
         <div class="opacity-60 justify-start text-black text-sm font-normal font-['Switzer']">Termos e Condições</div>
