@@ -289,10 +289,18 @@ function showModal(title, data, onSave) {
   let fields = '';
   for (const key in data) {
     if (key === 'id') continue;
-    fields += `
-      <label class="block text-[#3A4A5A] font-bold mt-2">${key.charAt(0).toUpperCase() + key.slice(1)}</label>
-      <input class="w-full p-2 rounded border border-[#A5B5C0] mb-2" name="${key}" value="${data[key] ?? ''}" />
-    `;
+    if (key === 'image') {
+      fields += `
+        <label class="block text-[#3A4A5A] font-bold mt-2">Imagem</label>
+        <input type="file" name="image" accept="image/*" class="w-full p-2 rounded border border-[#A5B5C0] mb-2" />
+        <input type="text" name="imageName" placeholder="Nome do ficheiro (ex: produto.png)" class="w-full p-2 rounded border border-[#A5B5C0] mb-2" value="${data[key] ?? ''}" />
+      `;
+    } else {
+      fields += `
+        <label class="block text-[#3A4A5A] font-bold mt-2">${key.charAt(0).toUpperCase() + key.slice(1)}</label>
+        <input class="w-full p-2 rounded border border-[#A5B5C0] mb-2" name="${key}" value="${data[key] ?? ''}" />
+      `;
+    }
   }
   modal.innerHTML = `
     <div class="bg-[#E5DCCA] rounded-2xl p-6 shadow-xl w-full max-w-md flex flex-col gap-4 items-center overflow-y-auto" style="max-height:90vh;">
@@ -307,12 +315,34 @@ function showModal(title, data, onSave) {
   document.body.appendChild(modal);
 
   document.getElementById('cancel-modal').onclick = () => modal.remove();
-  document.getElementById('save-modal').onclick = () => {
+  document.getElementById('save-modal').onclick = async (e) => {
+    e.preventDefault();
     const form = document.getElementById('modal-form');
     const formData = {};
     Array.from(form.elements).forEach(el => {
-      if (el.name) formData[el.name] = el.value;
+      if (el.name && el.type !== 'file') formData[el.name] = el.value;
     });
+
+    // Handle image upload if file selected
+    const imgInput = form.querySelector('input[type="file"][name="image"]');
+    const imgNameInput = form.querySelector('input[name="imageName"]');
+    if (imgInput && imgInput.files.length > 0 && imgNameInput && imgNameInput.value) {
+      const uploadData = new FormData();
+      uploadData.append('image', imgInput.files[0]);
+      uploadData.append('filename', imgNameInput.value);
+      const res = await fetch('/Projeto-Final-MD/api/uploadImg.php', {
+        method: 'POST',
+        body: uploadData
+      });
+      const result = await res.json();
+      if (result.success) {
+        formData.image = result.path;
+      } else {
+        alert(result.error || 'Erro ao fazer upload da imagem');
+        return;
+      }
+    }
+
     onSave(formData);
     modal.remove();
   };
