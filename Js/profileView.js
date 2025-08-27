@@ -22,7 +22,7 @@ function showConfirmModal(sim) {
 
   document.getElementById('cancel-delete').onclick = () => modal.remove();
   document.getElementById('confirm-delete').onclick = () => {
-    fetch('getApiPath() + simulation.php', {
+    fetch('../api/simulation.php', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ action: 'delete', id: sim.id })
@@ -58,7 +58,7 @@ function showEditModal(sim) {
   document.getElementById('save-rename').onclick = () => {
     const newName = document.getElementById('new-sim-name').value.trim();
     if (newName && newName !== sim.name) {
-      fetch('getApiPath() + simulation.php', {
+      fetch('../api/simulation.php', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({ action: 'rename', id: sim.id, name: newName })
@@ -119,7 +119,7 @@ function renderFavorites(favorites) {
     };
 
     card.innerHTML = `
-      <img src="${mod.image}" alt="${mod.name}" class="w-24 h-24 object-cover rounded-xl mb-2 border border-[#E5DCCA]">
+      <img src="../${mod.image}" alt="${mod.name}" class="w-24 h-24 object-cover rounded-xl mb-2 border border-[#E5DCCA]">
       <span class="text-sm font-['Switzer'] text-[#3A4A5A] font-bold">${mod.name}</span>
       <span class="text-xs text-[#2E2E2E]">${mod.width}x${mod.height}x${mod.depth}</span>
     `;
@@ -146,7 +146,7 @@ function showConfirmFavoriteModal(moduleId) {
 
   document.getElementById('cancel-fav-remove').onclick = () => modal.remove();
   document.getElementById('confirm-fav-remove').onclick = () => {
-    fetch('getApiPath() + favorite.php', {
+    fetch('../api/favorite.php', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `module_id=${moduleId}&remove=1`
@@ -216,7 +216,7 @@ function renderSimulations(simulations) {
 
 // Update loadProfile to also load favorites and simulations
 function loadProfile() {
-  fetch('getApiPath() + userProfile.php')
+  fetch('../api/userProfile.php')
     .then(res => res.json())
     .then(user => {
       if (user.error) {
@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
   cancelBtn.onclick = () => { modal.classList.add('hidden'); };
 
   saveBtn.onclick = () => {
-  fetch('getApiPath() + userProfile.php', {
+  fetch('../api/userProfile.php', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
@@ -272,7 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Logout logic
   document.getElementById('logout').onclick = () => {
-    fetch('getApiPath() + userLogout.php')
+    fetch('../api/userLogout.php')
       .then(res => res.json())
       .then(() => {
         window.location.href = '/Projeto-Final-MD/pages/login.php';

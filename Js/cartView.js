@@ -24,7 +24,7 @@ function renderCart() {
             <span class="material-symbols-outlined text-6xl text-[#A5B5C0] mb-4">shopping_cart</span>
             <h3 class="text-xl font-bold text-[#3A4A5A] font-['Switzer'] mb-2">Carrinho vazio</h3>
             <p class="text-gray-600 font-['Switzer'] mb-6">Adicione produtos ao seu carrinho para continuar</p>
-            <a href="./pages/catalog.php" class="bg-[#3A4A5A] text-white px-6 py-3 rounded-lg font-bold font-['Switzer'] hover:bg-[#2E2E2E] transition-colors">
+            <a href="./catalog.php" class="bg-[#3A4A5A] text-white px-6 py-3 rounded-lg font-bold font-['Switzer'] hover:bg-[#2E2E2E] transition-colors">
               Ver Produtos
             </a>
           </div>
@@ -53,7 +53,7 @@ function renderCart() {
 
         // Product image
         const img = document.createElement('img');
-        img.src = item.image;
+        img.src = '../'+item.image;
         img.alt = item.name;
         img.className = 'w-full sm:w-40 h-40 object-cover rounded-xl bg-[#E5DCCA] flex-shrink-0';
 
