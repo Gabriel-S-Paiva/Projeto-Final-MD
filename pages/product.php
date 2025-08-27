@@ -18,15 +18,15 @@
     <link rel="canonical" id="canonical-url" href="https://komudu.com/pages/product.php">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="Assets/Imgs/icon.svg">
+    <link rel="icon" type="image/svg+xml" href="../Assets/Imgs/icon.svg">
     
-    <base href="/Projeto-Final-MD/">
+
     <!-- Definição de fontes -->
-    <link rel="stylesheet" href="./Assets/Styles/fonts.css">
+    <link rel="stylesheet" href="../Assets/Styles/fonts.css">
     <!-- Definição de Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <!-- Criação de Variaveis Tailwind -->
-    <script src="./Assets/Styles/config.js"></script>
+    <script src="../Assets/Styles/config.js"></script>
     <!-- Tailwind CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     
@@ -102,7 +102,7 @@
                     <button id="add-cart" class="w-full bg-[#3A4A5A] h-12 rounded-lg overflow-hidden flex items-center justify-center text-[#E5DCCA] text-base font-bold font-['Switzer'] hover:bg-[#2E2E2E] transition-colors">
                         Adicionar ao carrinho
                     </button>
-                    <a href="./pages/simulator.php" class="w-full h-12 bg-white rounded-lg border-2 border-[#3A4A5A] overflow-hidden flex items-center justify-center text-base font-bold text-[#3A4A5A] font-['Switzer'] hover:bg-gray-50 transition-colors">
+                    <a href="simulator.php" class="w-full h-12 bg-white rounded-lg border-2 border-[#3A4A5A] overflow-hidden flex items-center justify-center text-base font-bold text-[#3A4A5A] font-['Switzer'] hover:bg-gray-50 transition-colors">
                         Simular no espaço
                     </a>
                 </div>
@@ -112,6 +112,7 @@
     <!-- Toast notification container -->
     <div id="toast" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-[#3A4A5A] text-white font-['Switzer'] px-6 py-3 rounded-lg shadow-lg opacity-0 pointer-events-none transition-all duration-300 z-50"></div>
     <?php include '../includes/footer.php'; ?>
-    <script src="Js/productView.js"></script>
+        <script src="../Js/pathUtils.js"></script>
+        <script src="../Js/productView.js"></script>
 </body>
 </html>

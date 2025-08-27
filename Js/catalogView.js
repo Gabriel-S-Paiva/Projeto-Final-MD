@@ -1,5 +1,3 @@
-let allModules = [];
-
 function renderModules(modules) {
   const catalogList = document.getElementById('catalog-list');
   catalogList.innerHTML = '';
@@ -15,7 +13,7 @@ function renderModules(modules) {
       ).join('');
 
       card.innerHTML = `
-        <img src="${module.image}" alt="${module.name}" class="w-full h-40 object-cover mb-2 rounded">
+        <img src="${resolveImagePath(module.image)}" alt="${module.name}" class="w-full h-40 object-cover mb-2 rounded">
         <div>
           <h3 class="justify-start text-black text-xl font-bold font-['Switzer']">${module.name}</h3>
           <p class="font-['switzer'] text-base opacity-60 mb-2">${module.depth}x${module.width}x${module.height}</p>
@@ -24,11 +22,11 @@ function renderModules(modules) {
         <div class="flex flex-wrap gap-2">
           ${tagsHtml}
         </div>
-        <a href="./pages/catalog.php" class="w-full bg-[#3A4A5A] h-9 rounded overflow-hidden flex items-center justify-center text-base text-white font-bold font-['Switzer']">Simular no espaço</a>
-        <a href="./pages/simulator.php" class="w-full h-9 bg-[#E5DCCA] rounded outline outline-1 outline-offset-[-1px] outline-[#3A4A5A] overflow-hidden flex items-center justify-center text-base font-bold text-[#3A4A5A] font-['Switzer']">Ver Detalhes</a>
+        <a href="simulator.php" class="w-full bg-[#3A4A5A] h-9 rounded overflow-hidden flex items-center justify-center text-base text-white font-bold font-['Switzer']">Simular no espaço</a>
+        <a href="product.php?id=${module.id}" class="w-full h-9 bg-[#E5DCCA] rounded outline outline-1 outline-offset-[-1px] outline-[#3A4A5A] overflow-hidden flex items-center justify-center text-base font-bold text-[#3A4A5A] font-['Switzer']">Ver Detalhes</a>
       `;
       card.addEventListener('click', () => {
-        window.location.href = `./pages/product.php?id=${module.id}`;
+        window.location.href = `product.php?id=${module.id}`;
       });
       // Favorite icon
       const favIcon = document.createElement('span');
@@ -37,11 +35,11 @@ function renderModules(modules) {
       favIcon.style.color = '#A5B5C0';
 
       // Check if favorited
-      fetch(`/Projeto-Final-MD/api/session.php`)
+      fetch(`../api/session.php`)
         .then(res => res.json())
         .then(session => {
           if (session.logged_in) {
-            fetch(`/Projeto-Final-MD/api/favorite.php?module_id=${module.id}`)
+            fetch(`../api/favorite.php?module_id=${module.id}`)
               .then(res => res.json())
               .then(data => {
                 favIcon.style.color = data.favorited ? '#3A4A5A' : '#A5B5C0';
@@ -51,13 +49,13 @@ function renderModules(modules) {
 
       favIcon.onclick = (e) => {
         e.stopPropagation();
-        fetch('/Projeto-Final-MD/api/session.php')
+        fetch('../api/session.php')
           .then(res => res.json())
           .then(session => {
             if (!session.logged_in) {
-              window.location.href = `pages/login.php`;
+              window.location.href = `login.php`;
             } else {
-              fetch('/Projeto-Final-MD/api/favorite.php', {
+              fetch('../api/favorite.php', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                 body: `module_id=${module.id}`
@@ -75,7 +73,7 @@ function renderModules(modules) {
   });
 }
 
-fetch('/Projeto-Final-MD/api/modules.php')
+fetch('../api/modules.php')
   .then(response => response.json())
   .then(modules => {
     allModules = modules;

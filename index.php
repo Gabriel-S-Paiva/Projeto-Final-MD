@@ -29,13 +29,12 @@
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="Assets/Imgs/icon.svg">
     
-    <base href="/Projeto-Final-MD/">
     <!-- Definição de fontes -->
-    <link rel="stylesheet" href="./Assets/Styles/fonts.css">
+    <link rel="stylesheet" href="Assets/Styles/fonts.css">
     <!-- Definição de Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <!-- Criação de Variaveis Tailwind -->
-    <script src="./Assets/Styles/config.js"></script>
+    <script src="Assets/Styles/config.js"></script>
     <!-- Tailwind CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     
@@ -60,7 +59,7 @@
     </script>
 </head>
 <body class="flex flex-col gap-5">
-    <?php include './includes/navbar.php'; ?>
+    <?php include 'includes/navbar.php'; ?>
     <header class="hidden">
         <h1>Komudu - Móveis Modulares para o Seu Espaço</h1>
     </header>
@@ -73,8 +72,8 @@
             <h2 class="text-[#3A4A5A] font-bold text-3xl md:text-4xl lg:text-5xl font-['Unispace']">Tudo se encaixa</h2>
             <p class="font-['Switzer'] text-black text-base md:text-lg leading-relaxed">Soluções modulares que se adaptam ao seu espaço, ao seu ritmo e à sua rotina. Uma nova forma de habitar com mais liberdade e menos excesso</p>
             <nav class="flex flex-col sm:flex-row gap-4">
-                <a href="./pages/catalog.php" class="flex-1 bg-[#3A4A5A] h-12 rounded-lg overflow-hidden flex items-center justify-center text-[#E5DCCA] text-base font-bold font-['Switzer'] hover:bg-[#2E2E2E] transition-colors" aria-label="Ver catálogo de produtos modulares">Ver Produtos</a>
-                <a href="./pages/simulator.php" class="flex-1 h-12 bg-white rounded-lg border-2 border-[#3A4A5A] overflow-hidden flex items-center justify-center text-base font-bold text-[#3A4A5A] font-['Switzer'] hover:bg-gray-50 transition-colors" aria-label="Aceder ao simulador de espaços">Planear Espaço</a>
+                <a href="pages/catalog.php" class="flex-1 bg-[#3A4A5A] h-12 rounded-lg overflow-hidden flex items-center justify-center text-[#E5DCCA] text-base font-bold font-['Switzer'] hover:bg-[#2E2E2E] transition-colors" aria-label="Ver catálogo de produtos modulares">Ver Produtos</a>
+                <a href="pages/simulator.php" class="flex-1 h-12 bg-white rounded-lg border-2 border-[#3A4A5A] overflow-hidden flex items-center justify-center text-base font-bold text-[#3A4A5A] font-['Switzer'] hover:bg-gray-50 transition-colors" aria-label="Aceder ao simulador de espaços">Planear Espaço</a>
             </nav>
         </section>
 
@@ -87,7 +86,7 @@
             <div id="home-modules" class="w-full overflow-x-auto sm:overflow-x-visible">
                 <!-- Product cards will be loaded here -->
             </div>
-            <a href="./pages/catalog.php" class="w-full h-12 bg-white rounded-lg border-2 border-[#3A4A5A] overflow-hidden flex items-center justify-center text-base font-bold text-[#3A4A5A] font-['Switzer'] hover:bg-gray-50 transition-colors">Ver todos os Produtos</a>
+            <a href="pages/catalog.php" class="w-full h-12 bg-white rounded-lg border-2 border-[#3A4A5A] overflow-hidden flex items-center justify-center text-base font-bold text-[#3A4A5A] font-['Switzer'] hover:bg-gray-50 transition-colors">Ver todos os Produtos</a>
         </div>
 
         <!-- Simulator Section -->
@@ -95,7 +94,7 @@
             <div class="p-6 flex flex-col gap-6 rounded-2xl bg-[#E5DCCA] md:p-8">
                 <h3 class="text-[#3A4A5A] text-xl md:text-2xl font-bold font-['Switzer']">Planeie o seu espaço facilmente</h3>
                 <p class="font-['Switzer'] text-black text-base md:text-lg leading-relaxed">Use o nosso simulador para testar módulos no seu espaço. Ajuste, combine e visualize antes de comprar</p>
-                <a href="./pages/simulator.php" class="bg-[#3A4A5A] h-12 rounded-lg overflow-hidden flex items-center justify-center text-[#E5DCCA] text-base font-bold font-['Switzer'] hover:bg-[#2E2E2E] transition-colors">Começar a planear</a>
+                <a href="pages/simulator.php" class="bg-[#3A4A5A] h-12 rounded-lg overflow-hidden flex items-center justify-center text-[#E5DCCA] text-base font-bold font-['Switzer'] hover:bg-[#2E2E2E] transition-colors">Começar a planear</a>
             </div>
             <div class="p-6 flex items-center justify-center rounded-2xl bg-[#E5DCCA]">
                 <img class="max-w-full h-auto" src="Assets/Imgs/planer.png" alt="Planning Tool" />
@@ -106,7 +105,7 @@
         <div class="w-full p-6 flex flex-col gap-6 rounded-2xl bg-[#E5DCCA] md:p-8">
             <h3 class="text-[#3A4A5A] text-xl md:text-2xl font-bold font-['Switzer']">Pensado para viver mais com menos</h3>
             <p class="font-['Switzer'] text-black text-base md:text-lg leading-relaxed">A Komodu nasceu para simplificar a vida urbana. Criamos um catálogo de móveis modulares, funcionais e flexíveis, que crescem consigo e se adaptam ao seu espaço, e não o contrário.</p>
-            <a href="./pages/about.php" class="w-full h-12 bg-white rounded-lg border-2 border-[#3A4A5A] overflow-hidden flex items-center justify-center text-base font-bold text-[#3A4A5A] font-['Switzer'] hover:bg-gray-50 transition-colors">Saber mais sobre a Komodu</a>
+            <a href="pages/about.php" class="w-full h-12 bg-white rounded-lg border-2 border-[#3A4A5A] overflow-hidden flex items-center justify-center text-base font-bold text-[#3A4A5A] font-['Switzer'] hover:bg-gray-50 transition-colors">Saber mais sobre a Komodu</a>
         </div>
 
         <div class="w-full p-5 inline-flex flex-col justify-start items-start gap-2.5 overflow-hidden rounded-2xl bg-[#E5DCCA]">
@@ -124,7 +123,8 @@
             <p class="font-['Switzer'] text-black opacity-60 text-sm md:text-base italic text-center">"O espaço não precisa de ser grande. Só precisa de fazer sentido"</p>
         </div>
     </main>
-    <?php include './includes/footer.php'; ?>
-    <script src="./Js/homeView.js"></script>
+    <?php include 'includes/footer.php'; ?>
+    <script src="Js/pathUtils.js"></script>
+    <script src="Js/homeView.js"></script>
 </body>
 </html>

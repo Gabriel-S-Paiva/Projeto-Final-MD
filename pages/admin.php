@@ -9,15 +9,15 @@
     <meta name="robots" content="noindex, nofollow">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="Assets/Imgs/icon.svg">
+    <link rel="icon" type="image/svg+xml" href="../Assets/Imgs/icon.svg">
     
-    <base href="/Projeto-Final-MD/">
+
     <!-- Definição de fontes -->
-    <link rel="stylesheet" href="./Assets/Styles/fonts.css">
+    <link rel="stylesheet" href="../Assets/Styles/fonts.css">
     <!-- Definição de Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <!-- Criação de Variaveis Tailwind -->
-    <script src="./Assets/Styles/config.js"></script>
+    <script src="../Assets/Styles/config.js"></script>
     <!-- Tailwind CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
@@ -44,6 +44,7 @@
     </section>
   </main>
   <?php include '../includes/footer.php'; ?>
-  <script src="Js/adminView.js"></script>
+      <script src="../Js/pathUtils.js"></script>
+      <script src="../Js/adminView.js"></script>
 </body>
 </html>

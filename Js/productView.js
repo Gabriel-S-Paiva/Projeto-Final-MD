@@ -1,6 +1,6 @@
 function getProductId() {
-  const params = new URLSearchParams(window.location.search);
-  return params.get('id');
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get('id');
 }
 const productId = getProductId();
 const favIcon = document.getElementById('favorite-icon');
@@ -21,7 +21,7 @@ function showToast(message, success = true) {
 }
 
 // Fetch product and variants
-fetch(`/Projeto-Final-MD/api/modules.php?id=${productId}`)
+fetch(`../api/modules.php?id=${productId}`)
   .then(res => res.json())
   .then(product => {
     productData = product;
@@ -29,7 +29,7 @@ fetch(`/Projeto-Final-MD/api/modules.php?id=${productId}`)
     document.getElementById('product-header').textContent = product.name;
     document.getElementById('product-name').textContent = product.name;
     document.getElementById('product-description').textContent = product.description;
-    document.querySelector('#product-image').src = product.image;
+    document.querySelector('#product-image').src = resolveImagePath(product.image);
     document.querySelector('#product-image').alt = product.name;
 
     // Price (default: module price)
@@ -91,11 +91,11 @@ function updatePrice() {
 
 // Favorite icon logic
 function updateFavoriteIcon() {
-  fetch('/Projeto-Final-MD/api/session.php')
+  fetch('../api/session.php')
     .then(res => res.json())
     .then(session => {
       if (session.logged_in) {
-        fetch(`/Projeto-Final-MD/api/favorite.php?module_id=${productId}`)
+        fetch(`../api/favorite.php?module_id=${productId}`)
           .then(res => res.json())
           .then(data => {
             favIcon.textContent = 'favorite';
@@ -113,13 +113,13 @@ function updateFavoriteIcon() {
 }
 favIcon.addEventListener('click', (e) => {
   e.stopPropagation();
-  fetch('/Projeto-Final-MD/api/session.php')
+  fetch('../api/session.php')
     .then(res => res.json())
     .then(session => {
       if (!session.logged_in) {
-        window.location.href = `/pages/login.php?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`;
+        window.location.href = `/login.php?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`;
       } else {
-        fetch('/Projeto-Final-MD/api/favorite.php', {
+        fetch('../api/favorite.php', {
           method: 'POST',
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           body: `module_id=${productId}`
@@ -151,13 +151,13 @@ document.querySelector('#add-cart').addEventListener('click', () => {
     showToast('Variante inválida!', false);
     return;
   }
-  fetch('/Projeto-Final-MD/api/session.php')
+  fetch('../api/session.php')
     .then(res => res.json())
     .then(session => {
       if (!session.logged_in) {
-        window.location.href = `pages/login.php?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`;
+        window.location.href = `login.php?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`;
       } else {
-        fetch('/Projeto-Final-MD/api/cart.php', {
+        fetch('../api/cart.php', {
           method: 'POST',
           headers: {'Content-Type': 'application/x-www-form-urlencoded'},
           body: `variant_id=${variant.id}&quantity=1`

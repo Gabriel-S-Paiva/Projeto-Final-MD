@@ -22,7 +22,7 @@ function showConfirmModal(sim) {
 
   document.getElementById('cancel-delete').onclick = () => modal.remove();
   document.getElementById('confirm-delete').onclick = () => {
-    fetch('/Projeto-Final-MD/api/simulation.php', {
+    fetch('getApiPath() + simulation.php', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ action: 'delete', id: sim.id })
@@ -58,7 +58,7 @@ function showEditModal(sim) {
   document.getElementById('save-rename').onclick = () => {
     const newName = document.getElementById('new-sim-name').value.trim();
     if (newName && newName !== sim.name) {
-      fetch('/Projeto-Final-MD/api/simulation.php', {
+      fetch('getApiPath() + simulation.php', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({ action: 'rename', id: sim.id, name: newName })
@@ -146,7 +146,7 @@ function showConfirmFavoriteModal(moduleId) {
 
   document.getElementById('cancel-fav-remove').onclick = () => modal.remove();
   document.getElementById('confirm-fav-remove').onclick = () => {
-    fetch('/Projeto-Final-MD/api/favorite.php', {
+    fetch('getApiPath() + favorite.php', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `module_id=${moduleId}&remove=1`
@@ -216,7 +216,7 @@ function renderSimulations(simulations) {
 
 // Update loadProfile to also load favorites and simulations
 function loadProfile() {
-  fetch('/Projeto-Final-MD/api/userProfile.php')
+  fetch('getApiPath() + userProfile.php')
     .then(res => res.json())
     .then(user => {
       if (user.error) {
@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
   cancelBtn.onclick = () => { modal.classList.add('hidden'); };
 
   saveBtn.onclick = () => {
-  fetch('/Projeto-Final-MD/api/userProfile.php', {
+  fetch('getApiPath() + userProfile.php', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
@@ -272,7 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Logout logic
   document.getElementById('logout').onclick = () => {
-    fetch('/Projeto-Final-MD/api/userLogout.php')
+    fetch('getApiPath() + userLogout.php')
       .then(res => res.json())
       .then(() => {
         window.location.href = '/Projeto-Final-MD/pages/login.php';

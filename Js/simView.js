@@ -23,20 +23,24 @@ let offsetY = 0;
 // Preload images
 const imageCache = new Map();
 
+
 function preloadImage(src) {
+  const resolvedSrc = resolveImagePath(src);
   return new Promise((resolve, reject) => {
-    if (imageCache.has(src)) {
-      resolve(imageCache.get(src));
+    if (imageCache.has(resolvedSrc)) {
+      resolve(imageCache.get(resolvedSrc));
       return;
     }
     
     const img = new Image();
     img.onload = () => {
+      imageCache.set(resolvedSrc, img);
+      // Also cache with original src for compatibility
       imageCache.set(src, img);
       resolve(img);
     };
     img.onerror = reject;
-    img.src = src;
+    img.src = resolvedSrc;
   });
 }
 
@@ -51,7 +55,7 @@ function checkUrlParams() {
 
 // Load simulation from API
 function loadSimulation(simulationId) {
-  fetch(`/Projeto-Final-MD/api/simulation.php?id=${simulationId}`)
+  fetch(`../api/simulation.php?id=${simulationId}`)
     .then(res => res.json())
     .then(data => {
       if (data.error) {
@@ -123,7 +127,7 @@ function loadSimulation(simulationId) {
 }
 
 // Fetch modules for library
-fetch('/Projeto-Final-MD/api/modules.php')
+fetch('../api/modules.php')
   .then(res => res.json())
   .then(data => {
     modules = data;
@@ -152,7 +156,7 @@ function renderModuleLibrary() {
     btn.className = 'bg-white border-2 border-[#A5B5C0] rounded-lg p-3 flex flex-col items-center gap-2 shadow hover:bg-[#E5DCCA] hover:border-[#3A4A5A] transition-all duration-200 min-h-[120px]';
     
     const img = document.createElement('img');
-    img.src = mod.image;
+    img.src = '../'+mod.image;
     img.alt = mod.name;
     img.className = 'w-12 h-12 object-cover rounded';
     
@@ -460,11 +464,11 @@ document.getElementById('simulation-name').oninput = function() {
 
 // Save simulation
 document.getElementById('save-simulation').onclick = () => {
-  fetch('/Projeto-Final-MD/api/session.php')
+  fetch('../api/session.php')
     .then(res => res.json())
     .then(session => {
       if (!session.logged_in) {
-        window.location.href = '/Projeto-Final-MD/pages/login.php?redirect=simulator.php';
+        window.location.href = '/Projeto-Final-MD/login.php?redirect=simulator.php';
         return;
       }
       
@@ -488,7 +492,7 @@ document.getElementById('save-simulation').onclick = () => {
         }))
       };
       
-      fetch('/Projeto-Final-MD/api/simulation.php', {
+      fetch('../api/simulation.php', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(simulationData)

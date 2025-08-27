@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Delivery History
 function loadDeliveries() {
-  fetch('/Projeto-Final-MD/api/admin.php?action=deliveries')
+  fetch('../api/admin.php?action=deliveries')
     .then(res => res.json())
     .then(data => {
       const container = document.getElementById('deliveries-list');
@@ -30,7 +30,7 @@ function loadDeliveries() {
 
 // Product Management
 function loadProducts() {
-  fetch('/Projeto-Final-MD/api/admin.php?action=products')
+  fetch('../api/admin.php?action=products')
     .then(res => res.json())
     .then(products => {
       const container = document.getElementById('product-management');
@@ -48,7 +48,7 @@ function loadProducts() {
         card.className = 'mb-4 p-4 bg-white rounded-lg shadow flex flex-col gap-2 border border-[#A5B5C0]';
         card.innerHTML = `
           <div class="flex items-center gap-4">
-            <img src="${mod.image}" alt="${mod.name}" class="w-16 h-16 object-cover rounded-lg border border-[#E5DCCA]">
+            <img src="../${mod.image}" alt="${mod.name}" class="w-16 h-16 object-cover rounded-lg border border-[#E5DCCA]">
             <div>
               <span class="font-bold text-[#3A4A5A]">${mod.name}</span>
               <span class="block text-xs text-[#2E2E2E]">${mod.width}x${mod.height}x${mod.depth}</span>
@@ -79,7 +79,7 @@ window.showProductModal = function() {
   showModal('Adicionar Produto', {
     name: '', image: '', width: '', height: '', depth: '', stock: '', price: ''
   }, (data) => {
-    fetch('/Projeto-Final-MD/api/admin.php?action=add_product', {
+    fetch('../api/admin.php?action=add_product', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(data)
@@ -88,13 +88,13 @@ window.showProductModal = function() {
 };
 
 window.editProduct = function(id) {
-  fetch('/Projeto-Final-MD/api/admin.php?action=products')
+  fetch('../api/admin.php?action=products')
     .then(res => res.json())
     .then(products => {
       const mod = products.find(m => m.id == id);
       showModal('Editar Produto', mod, (data) => {
         data.id = id;
-        fetch('/Projeto-Final-MD/api/admin.php?action=edit_product', {
+        fetch('../api/admin.php?action=edit_product', {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify(data)
@@ -121,7 +121,7 @@ window.deleteProduct = function(id) {
 
   document.getElementById('cancel-product-delete').onclick = () => modal.remove();
   document.getElementById('confirm-product-delete').onclick = () => {
-    fetch('/Projeto-Final-MD/api/admin.php?action=delete_product', {
+    fetch('../api/admin.php?action=delete_product', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `id=${id}`
@@ -135,7 +135,7 @@ window.deleteProduct = function(id) {
 window.restockVariant = function(id) {
   const amount = prompt('Quantidade para restock:', '1');
   if (amount && !isNaN(amount)) {
-    fetch('/Projeto-Final-MD/api/admin.php?action=restock_variant', {
+    fetch('../api/admin.php?action=restock_variant', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `id=${id}&amount=${amount}`
@@ -144,7 +144,7 @@ window.restockVariant = function(id) {
 };
 
 window.editVariant = function(id) {
-  fetch('/Projeto-Final-MD/api/admin.php?action=products')
+  fetch('../api/admin.php?action=products')
     .then(res => res.json())
     .then(products => {
       let variant;
@@ -154,7 +154,7 @@ window.editVariant = function(id) {
       if (!variant) return;
       showModal('Editar Variante', variant, (data) => {
         data.id = id;
-        fetch('/Projeto-Final-MD/api/admin.php?action=edit_variant', {
+        fetch('../api/admin.php?action=edit_variant', {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify(data)
@@ -167,7 +167,7 @@ window.showVariantModal = function(module_id) {
   showModal('Adicionar Variante', {
     module_id, color: '', width: '', height: '', depth: '', stock: '', price: ''
   }, (data) => {
-    fetch('/Projeto-Final-MD/api/admin.php?action=add_variant', {
+    fetch('../api/admin.php?action=add_variant', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(data)
@@ -177,7 +177,7 @@ window.showVariantModal = function(module_id) {
 
 // User Management
 function loadUsers() {
-  fetch('/Projeto-Final-MD/api/admin.php?action=users')
+  fetch('../api/admin.php?action=users')
     .then(res => res.json())
     .then(users => {
       const container = document.getElementById('user-management');
@@ -205,13 +205,13 @@ function loadUsers() {
 
 // User CRUD modals
 window.editUser = function(id) {
-  fetch('/Projeto-Final-MD/api/admin.php?action=users')
+  fetch('../api/admin.php?action=users')
     .then(res => res.json())
     .then(users => {
       const user = users.find(u => u.id == id);
       showModal('Editar Utilizador', user, (data) => {
         data.id = id;
-        fetch('/Projeto-Final-MD/api/admin.php?action=edit_user', {
+        fetch('../api/admin.php?action=edit_user', {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify(data)
@@ -238,7 +238,7 @@ window.deleteUser = function(id) {
 
   document.getElementById('cancel-user-delete').onclick = () => modal.remove();
   document.getElementById('confirm-user-delete').onclick = () => {
-    fetch('/Projeto-Final-MD/api/admin.php?action=delete_user', {
+    fetch('../api/admin.php?action=delete_user', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `id=${id}`
@@ -271,7 +271,7 @@ window.changeRole = function(id, currentRole) {
   document.getElementById('cancel-role').onclick = () => modal.remove();
   document.getElementById('save-role').onclick = () => {
     const role = document.getElementById('role-select').value;
-    fetch('/Projeto-Final-MD/api/admin.php?action=change_role', {
+    fetch('../api/admin.php?action=change_role', {
       method: 'POST',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: `id=${id}&role=${role}`
@@ -330,7 +330,7 @@ function showModal(title, data, onSave) {
       const uploadData = new FormData();
       uploadData.append('image', imgInput.files[0]);
       uploadData.append('filename', imgNameInput.value);
-      const res = await fetch('/Projeto-Final-MD/api/uploadImg.php', {
+      const res = await fetch('getApiPath() + uploadImg.php', {
         method: 'POST',
         body: uploadData
       });

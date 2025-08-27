@@ -1,4 +1,4 @@
-fetch('/Projeto-Final-MD/api/modules.php')
+fetch('api/modules.php')
   .then(response => response.json())
   .then(modules => {
     const container = document.getElementById('home-modules');
@@ -15,7 +15,7 @@ fetch('/Projeto-Final-MD/api/modules.php')
 
       card.innerHTML = `
         <div class="aspect-square overflow-hidden rounded-xl mb-2">
-          <img src="${module.image}" alt="${module.name}" class="w-full h-full object-cover">
+          <img src="${resolveImagePath(module.image)}" alt="${module.name}" class="w-full h-full object-cover">
         </div>
         <div class="flex-1">
           <h3 class="text-black text-lg md:text-xl font-bold font-['Switzer'] mb-2">${module.name}</h3>
@@ -25,14 +25,14 @@ fetch('/Projeto-Final-MD/api/modules.php')
         <div class="flex flex-wrap gap-2 mb-4">
           ${tagsHtml}
         </div>
-        <a href="./pages/simulator.php" class="w-full bg-[#3A4A5A] h-10 rounded-lg overflow-hidden flex items-center justify-center text-base text-white font-bold font-['Switzer'] hover:bg-[#2E2E2E] transition-colors">
+        <a href="pages/simulator.php" class="w-full bg-[#3A4A5A] h-10 rounded-lg overflow-hidden flex items-center justify-center text-base text-white font-bold font-['Switzer'] hover:bg-[#2E2E2E] transition-colors">
           Simular no espaço
         </a>
       `;
       
       card.addEventListener('click', (e) => {
         if (e.target.tagName !== 'A' && e.target.tagName !== 'SPAN') {
-          window.location.href = `./pages/product.php?id=${module.id}`;
+          window.location.href = `pages/product.php?id=${module.id}`;
         }
       });
 
@@ -42,11 +42,11 @@ fetch('/Projeto-Final-MD/api/modules.php')
       favIcon.style.color = '#A5B5C0';
 
       // Check if favorited
-      fetch(`/Projeto-Final-MD/api/session.php`)
+      fetch(`api/session.php`)
         .then(res => res.json())
         .then(session => {
           if (session.logged_in) {
-            fetch(`/Projeto-Final-MD/api/favorite.php?module_id=${module.id}`)
+            fetch(`api/favorite.php?module_id=${module.id}`)
               .then(res => res.json())
               .then(data => {
                 favIcon.style.color = data.favorited ? '#3A4A5A' : '#A5B5C0';
@@ -56,13 +56,13 @@ fetch('/Projeto-Final-MD/api/modules.php')
 
       favIcon.onclick = (e) => {
         e.stopPropagation();
-        fetch('/Projeto-Final-MD/api/session.php')
+        fetch('api/session.php')
           .then(res => res.json())
           .then(session => {
             if (!session.logged_in) {
-              window.location.href = `pages/login.php?redirect=${encodeURIComponent(window.location.pathname)}`;
+              window.location.href = `login.php?redirect=${encodeURIComponent(window.location.pathname)}`;
             } else {
-              fetch('/Projeto-Final-MD/api/favorite.php', {
+              fetch('api/favorite.php', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                 body: `module_id=${module.id}`

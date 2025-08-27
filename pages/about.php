@@ -18,15 +18,14 @@
     <link rel="canonical" href="https://komudu.com/pages/about.php">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="Assets/Imgs/icon.svg">
+    <link rel="icon" type="image/svg+xml" href="../Assets/Imgs/icon.svg">
     
-    <base href="/Projeto-Final-MD/">
     <!-- Definição de fontes -->
-    <link rel="stylesheet" href="./Assets/Styles/fonts.css">
+    <link rel="stylesheet" href="../Assets/Styles/fonts.css">
     <!-- Definição de Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <!-- Criação de Variaveis Tailwind -->
-    <script src="./Assets/Styles/config.js"></script>
+    <script src="../Assets/Styles/config.js"></script>
     <!-- Tailwind CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     
@@ -56,7 +55,7 @@
         <div class="w-full p-5 flex flex-col gap-4 rounded-2xl bg-[#E5DCCA] md:p-8">
             <h2 class="text-[#3A4A5A] text-2xl md:text-4xl font-bold font-['Unispace']">Sobre a Komodu</h2>
             <div class="w-full aspect-video md:aspect-[16/9] lg:aspect-[2/1] overflow-hidden rounded-xl">
-                <img class="w-full h-full object-cover" src="Assets/Imgs/about-bg.png" alt="Sobre a Komodu">
+                <img class="w-full h-full object-cover" src="../Assets/Imgs/about-bg.png" alt="Sobre a Komodu">
             </div>
             <p class="text-black text-base md:text-lg font-normal font-['Switzer'] leading-relaxed">Na Komudu acreditamos que cada espaço é único e que o mobiliário deve adaptar-se a si — não o contrário. Criamos soluções modulares inteligentes, que crescem, transformam-se e se encaixam na sua vida.</p>
         </div>
@@ -103,7 +102,7 @@
         <!-- CTA Section -->
         <div class="w-full p-5 flex flex-col gap-4 rounded-2xl bg-[#E5DCCA] md:p-8 text-center">
             <h2 class="text-[#3A4A5A] text-xl md:text-2xl font-bold font-['Switzer']">Descubra o catálogo e dê forma ao seu espaço com a Komudu.</h2>
-            <a href="./pages/catalog.php" class="inline-flex items-center justify-center px-6 py-3 bg-[#3A4A5A] text-white rounded-lg font-bold font-['Switzer'] hover:bg-[#2E2E2E] transition-colors duration-200 max-w-xs mx-auto">Ver Catálogo</a>
+            <a href="catalog.php" class="inline-flex items-center justify-center px-6 py-3 bg-[#3A4A5A] text-white rounded-lg font-bold font-['Switzer'] hover:bg-[#2E2E2E] transition-colors duration-200 max-w-xs mx-auto">Ver Catálogo</a>
         </div>
     </main>
     <?php include '../includes/footer.php'; ?>
