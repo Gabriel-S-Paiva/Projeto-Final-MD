@@ -105,7 +105,7 @@ function renderFavorites(favorites) {
     `;
 
     card.onclick = () => {
-      window.location.href = `/Projeto-Final-MD/pages/product.php?id=${mod.id}`;
+      window.location.href = `./product.php?id=${mod.id}`;
     };
 
     // Remove favorite button with confirmation modal
@@ -275,7 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch('../api/userLogout.php')
       .then(res => res.json())
       .then(() => {
-        window.location.href = '/Projeto-Final-MD/pages/login.php';
+        window.location.href = './login.php';
       });
   };
 });
